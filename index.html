@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resurgence 2025 - Cultural Festival</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --gold: #ffb942;
+      --dark: #050505;
+      --muted: #a9a9a9;
+      --white: #fff;
+      --glass: rgba(86, 82, 82, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #000;
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ===== Background Video ===== */
+    video.bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(35%) blur(0.4px);
+    }
+
+    /* ===== Sidebar Navbar (Left) ===== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100%;
+      background: transparent;
+      backdrop-filter: blur(12px);
+      border-right: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      z-index: 10;
+    }
+
+    .sidebar .logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 1.2px solid var(--gold);
+      box-shadow: 0 0 25px rgba(255,185,66,0.5);
+      margin-bottom: 50px;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .sidebar nav a {
+      color: var(--gold);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.75rem;
+      transition: 0.3s;
+    }
+
+    .sidebar nav a i {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .sidebar nav a:hover {
+      color: var(--white);
+      transform: scale(1.1);
+    }
+
+    /* ===== Right Social Bar ===== */
+    .socialbar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 60%;
+      background: transparent;
+      backdrop-filter: blur(12px);
+      border-left: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 30px;
+      gap: 50px;
+      z-index: 10;
+    }
+
+    .socialbar a {
+      color: var(--gold);
+      font-size: 1.4rem;
+      transition: 0.3s;
+    }
+
+    .socialbar a:hover {
+      color: #fff;
+      transform: scale(1.2);
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+
+    /* .hero img {
+      width: 320px;
+      height: auto;
+      margin-bottom: 30px;
+      animation: pulse 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 40px rgba(255,185,66,0.4));
+    } */
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Hero title replaced with an animated two-line title */
+    .hero-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      line-height: 1;
+    }
+
+    .hero-title .main {
+      color: var(--gold);
+      font-size: 3.5rem;
+      text-shadow: 0 0 25px rgba(255,185,66,0.5);
+      font-weight: 700;
+      letter-spacing: 1px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .hero-title .main .char {
+      display: inline-block;
+      transform: scale(0.6);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.6); opacity: 0; }
+      60% { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .hero-title .main .char.show {
+      animation: pop 360ms cubic-bezier(.2,.9,.3,1) forwards;
+    }
+
+    .hero-title .sub {
+      color: var(--muted);
+      font-size: 1.15rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 600ms ease, transform 600ms ease;
+      letter-spacing: 0.6px;
+    }
+
+    .hero-title .sub.show {
+      opacity: 1;
+      transform: translateY(0);
+      color: var(--gold);
+      text-shadow: 0 0 12px rgba(255,185,66,0.35);
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 15px rgba(255,185,66,0.5); }
+      to { text-shadow: 0 0 35px rgba(255,185,66,1); }
+    }
+
+    .hero p {
+      margin-top: 16px;
+      max-width: 800px;
+      color: var(--muted);
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .dates {
+      color: var(--gold);
+      font-weight: 700;
+      margin-top: 20px;
+      font-size: 1.3rem;
+      letter-spacing: 1.2px;
+    }
+
+    .buttons {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn {
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: rgba(0,0,0,0.7);
+      padding: 25px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    @media (max-width: 900px) {
+      .sidebar, .socialbar {
+        display: none;
+      }
+
+      .hero img {
+        width: 250px;
+      }
+
+      .hero-title .main {
+        font-size: 2.2rem;
+      }
+
+      .hero-title .sub {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ===== Countdown Timer (Top-right) ===== */
+    .countdown {
+      position: fixed;
+      top: 18px;
+      right: 130px; /* sits left of the right socialbar (100px) with spacing */
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      z-index: 11;
+      color: var(--gold);
+      font-weight: 700;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 12px rgba(255,185,66,0.6);
+      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.25);
+      border-radius: 12px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,185,66,0.12);
+    }
+
+    .countdown .segment {
+      display: flex;
+      flex-direction: column;
+      min-width: 54px;
+      padding: 4px;
+    }
+
+    .countdown .value {
+      font-size: 1.15rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .countdown .label {
+      font-size: 0.6rem;
+      color: var(--muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    @media (max-width: 600px) {
+      .countdown { right: 16px; top: 12px; padding: 6px 8px; }
+      .countdown .value { font-size: 0.95rem; }
+      .countdown .label { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Video -->
+  <video class="bg-video" autoplay muted loop>
+    <source src="bg.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Countdown Timer (top-right) -->
+  <div id="countdown" class="countdown" aria-live="polite" role="status">
+    <div class="segment">
+      <div class="value" id="days">0</div>
+      <div class="label">Days</div>
+    </div>
+    <div class="segment">
+      <div class="value" id="hours">00</div>
+      <div class="label">Hours</div>
+    </div>
+    <div class="segment">
+      <div class="value" id="minutes">00</div>
+      <div class="label">Minutes</div>
+    </div>
+    <div class="segment">
+      <div class="value" id="seconds">00</div>
+      <div class="label">Seconds</div>
+    </div>
+  </div>
+
+  <!-- Left Sidebar -->
+  <div class="sidebar">
+    <img src="logo.png" class="logo" alt="Resurgence Logo" />
+    <nav>
+      <a href="#"><i class="bi bi-house-fill"></i>Home</a>
+      <a href="#about"><i class="bi bi-person"></i>About</a>
+      <a href="#events"><i class="bi bi-calendar-event"></i>Events</a>
+      <a href="#sponsors"><i class="bi bi-gem"></i>Sponsors</a>
+      <a href="#contact"><i class="bi bi-envelope-fill"></i>Contact</a>
+    </nav>
+  </div>
+
+  <!-- Right Social Icons -->
+  <div class="socialbar">
+    <a href="#"><i class="bi bi-instagram"></i></a>
+    <a href="#"><i class="bi bi-youtube"></i></a>
+    <a href="#"><i class="bi bi-whatsapp"></i></a>
+    <a href="#"><i class="bi bi-facebook"></i></a>
+    <a href="#"><i class="bi bi-twitter"></i></a>
+    
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <!-- <img src="logo.jpeg" alt="Resurgence Logo" /> -->
+    <h1 class="hero-title">
+      <span class="main" id="hero-main" aria-hidden="false"></span>
+      <span class="sub" id="hero-sub" aria-hidden="true">Cultural Fest</span>
+    </h1>
+    <p>Experience the rebirth of art, music, and creativity at Shri Mata Vaishno Devi University’s most awaited cultural extravaganza.  
+    A celebration of talent, rhythm, and colors — Resurgence 2025 awaits you!</p>
+    <div class="dates">19<sup>th</sup> - 30<sup>th</sup> November 2025</div>
+
+    <div class="buttons">
+      <button class="btn">Explore Events</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Resurgence Cultural Festival | Shri Mata Vaishno Devi University
+  </footer>
+
+  <script>
+    // Smooth scrolling
+    document.querySelectorAll('.sidebar nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        if (link.getAttribute('href').startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Countdown timer
+    (function() {
+      // Assumption: event starts on Nov 19, 2025 at 00:00 local time. Change below if needed.
+      const eventDate = new Date(2025, 10, 19, 0, 0, 0); // month is 0-indexed (10 = November)
+
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+
+      function pad(n) { return n.toString().padStart(2, '0'); }
+
+      function updateCountdown() {
+        const now = new Date();
+        let diff = eventDate - now;
+        if (diff <= 0) {
+          // Event started
+          clearInterval(intervalId);
+          const container = document.getElementById('countdown');
+          container.innerHTML = '<div class="segment"><div class="value">Event</div><div class="label">Started</div></div>';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+        const minutes = Math.floor(diff / (1000 * 60));
+        diff -= minutes * (1000 * 60);
+        const seconds = Math.floor(diff / 1000);
+
+        daysEl.textContent = days;
+        hoursEl.textContent = pad(hours);
+        minutesEl.textContent = pad(minutes);
+        secondsEl.textContent = pad(seconds);
+      }
+
+      // initial update + interval
+      updateCountdown();
+      const intervalId = setInterval(updateCountdown, 1000);
+    })();
+
+    // Hero heading typing animation
+    (function() {
+      const text = 'Resergence';
+      const totalMs = 2500; // total typing duration in ms (between 2 and 3 seconds)
+      const target = document.getElementById('hero-main');
+      const sub = document.getElementById('hero-sub');
+      if (!target || !sub) return;
+
+      // Clear any initial content
+      target.textContent = '';
+      sub.classList.remove('show');
+
+      const len = text.length;
+      const baseInterval = Math.max(20, Math.floor(totalMs / len));
+
+      // Type letters with per-letter span so we can animate size/pop
+      for (let i = 0; i < len; i++) {
+        setTimeout(((ch) => () => {
+          const span = document.createElement('span');
+          span.className = 'char';
+          span.textContent = ch;
+          target.appendChild(span);
+          // trigger animation on next frame
+          requestAnimationFrame(() => span.classList.add('show'));
+        })(text[i]), baseInterval * i);
+      }
+
+      // After typing completes, show sub-title with animation
+      setTimeout(() => {
+        // small delay before showing sub-title
+        sub.classList.add('show');
+        // make sub accessible
+        sub.setAttribute('aria-hidden', 'false');
+      }, baseInterval * len + 200);
+    })();
+  </script>
+</body>
+</html>
