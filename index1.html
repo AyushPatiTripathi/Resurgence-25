@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resurgence 2025 — Cultural Festival</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Georgia', serif;
+      color: #f2e8d5;
+      overflow-x: hidden;
+    }
+
+    /* 🎥 Background video setup */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.35) saturate(1.2);
+    }
+
+    /* 🔥 Countdown timer (top-right corner) */
+    #countdown {
+      position: fixed;
+      top: 25px;
+      right: 35px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+    }
+
+    #countdown .block {
+      text-align: center;
+    }
+
+    #countdown .num {
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffe1a8;
+    }
+
+    #countdown .label {
+      font-size: 10px;
+      color: #d9c6a3;
+    }
+
+    /* 🔷 Header */
+    header {
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .logo {
+      width: 240px;
+      height: 240px;
+      margin: 0 auto;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 50px rgba(255,200,120,0.25);
+      border: 4px solid rgba(255,200,120,0.3);
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    nav {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #f5deb3;
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffca6d;
+    }
+
+    /* ✨ Hero Text Section */
+    .content {
+      text-align: center;
+      margin: 60px auto;
+      max-width: 900px;
+      padding: 0 20px;
+    }
+
+    .content h1 {
+      font-size: 36px;
+      text-shadow: 0 0 15px rgba(255,255,255,0.1);
+    }
+
+    .content p {
+      margin-top: 16px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #d7c7af;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 12px 28px;
+      border-radius: 25px;
+      background: linear-gradient(45deg, #ff9d4a, #ffd27a);
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* 🎭 Artists Section (Mandala style) */
+    .artists {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin: 80px auto;
+      max-width: 800px;
+    }
+
+    .artist {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      border: 6px solid transparent;
+      background: conic-gradient(
+        from 0deg,
+        #ffcf7d,
+        #f28f5e,
+        #e367a4,
+        #7e6ff0,
+        #64c1ff,
+        #ffcf7d
+      );
+      padding: 4px;
+      animation: spinBorder 6s linear infinite;
+    }
+
+    .artist img {
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 4px solid rgba(0,0,0,0.7);
+    }
+
+    @keyframes spinBorder {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      padding: 40px 20px;
+      font-size: 14px;
+      color: #b8aa96;
+    }
+
+    @media (max-width: 768px) {
+      .artist {
+        width: 120px;
+        height: 120px;
+      }
+      .content h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🎥 Background Video -->
+  <video autoplay muted loop id="bg-video">
+    <source src="bg3.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- 🕒 Countdown Timer (Top Right) -->
+  <div id="countdown">
+    <div class="block"><div class="num" id="days">00</div><div class="label">DAYS</div></div>
+    <div class="block"><div class="num" id="hours">00</div><div class="label">HRS</div></div>
+    <div class="block"><div class="num" id="minutes">00</div><div class="label">MIN</div></div>
+    <div class="block"><div class="num" id="seconds">00</div><div class="label">SEC</div></div>
+  </div>
+
+  <!-- 🔷 Header -->
+  <header>
+    <div class="logo">
+      <img src="logo.jpg" alt="Festival Logo" />
+    </div>
+    <nav>
+      <a href="#">HOME</a>
+      <a href="#">ARTISTS</a>
+      <a href="#">SCHEDULE</a>
+      <a href="#">GALLERY</a>
+      <a href="#">TICKETS</a>
+    </nav>
+  </header>
+
+  <!-- ✨ Content -->
+  <section class="content">
+    <h1>HARMONIC MANDALA: THE ART OF CONNECTION</h1>
+    <p>Explore a universe of interconnectivity, music, and culture. Witness the rhythmic dance of tradition and innovation, together weaving the tapestry of human expression.</p>
+    <a href="#" class="btn">EXPLORE THE JOURNEY</a>
+  </section>
+
+  <!-- 🎭 Artists Section -->
+  <section class="artists">
+    <div class="artist"><img src="logo.jpg" alt="artist"></div>
+    <div class="artist"><img src="assets/avatars/avatar2.png" alt="artist"></div>
+    <div class="artist"><img src="assets/avatars/avatar3.png" alt="artist"></div>
+    <div class="artist"><img src="assets/avatars/avatar4.png" alt="artist"></div>
+    <div class="artist"><img src="assets/avatars/avatar5.png" alt="artist"></div>
+    <div class="artist"><img src="assets/avatars/avatar6.png" alt="artist"></div>
+    <div class="artist"><img src="assets/avatars/avatar7.png" alt="artist"></div>
+  </section>
+
+  <footer>
+    © 2025 RESURGENCE CULTURAL FESTIVAL
+  </footer>
+
+  <script>
+    // 🕒 Countdown Timer
+    const festivalDate = new Date("2025-12-01T18:00:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      let diff = festivalDate - now;
+      if (diff < 0) diff = 0;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
+

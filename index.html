@@ -31,29 +31,94 @@
       overflow-x: hidden;
     }
 
-    /* ===== Background Video ===== */
-    video.bg-video {
+    /* ===== Background Image ===== */
+    .bg-image {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      background: #1C1C1C;
       z-index: -1;
-      filter: brightness(35%) blur(0.4px);
+      overflow: hidden;
+    }
+
+    .bg-canvas {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    /* ===== Splash Screen ===== */
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      opacity: 1;
+      transition: opacity 800ms ease;
+    }
+
+    .splash-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .splash-logo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 40px rgba(255,185,66,0.6);
+      margin-bottom: 30px;
+      animation: splash-pulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes splash-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(255,185,66,0.6); }
+      50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(255,185,66,0.9); }
+    }
+
+    .splash-text {
+      color: var(--gold);
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-align: center;
+      text-shadow: 0 0 20px rgba(255,185,66,0.5);
+    }
+
+    .splash-text .char {
+      display: inline-block;
+      transform: scale(0.6);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .splash-text .char.show {
+      animation: pop 360ms cubic-bezier(.2,.9,.3,1) forwards;
     }
 
     /* ===== Sidebar Navbar (Left) ===== */
     .sidebar {
       position: fixed;
-      top: 0;
+      top: 120px;
       left: 0;
       width: 100px;
-      height: 100%;
+      height: auto;
       background: transparent;
       backdrop-filter: blur(12px);
       border-right: 1px solid rgba(255,255,255,0.1);
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
       padding: 20px 0;
@@ -99,18 +164,18 @@
     /* ===== Right Social Bar ===== */
     .socialbar {
       position: fixed;
-      top: 0;
+      top: 120px;
       right: 0;
       width: 100px;
-      height: 60%;
+      height: auto;
       background: transparent;
       backdrop-filter: blur(12px);
       border-left: 1px solid rgba(255,255,255,0.1);
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 30px;
+      justify-content: flex-start;
+      padding: 20px 0;
       gap: 50px;
       z-index: 10;
     }
@@ -131,11 +196,21 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       text-align: center;
-      padding-left: 100px;
-      padding-right: 100px;
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-top: 40px;
+    }
+
+    .hero .logo-header {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 40px rgba(255,185,66,0.8);
     }
 
     /* .hero img {
@@ -153,7 +228,7 @@
 
     /* Hero title replaced with an animated two-line title */
     .hero-title {
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
       gap: 8px;
@@ -215,6 +290,7 @@
       color: var(--muted);
       font-size: 1.2rem;
       line-height: 1.8;
+      display: none;
     }
 
     .dates {
@@ -223,11 +299,12 @@
       margin-top: 20px;
       font-size: 1.3rem;
       letter-spacing: 1.2px;
+      display: none;
     }
 
     .buttons {
       margin-top: 35px;
-      display: flex;
+      display: none;
       justify-content: center;
     }
 
@@ -256,6 +333,7 @@
       color: var(--muted);
       font-size: 0.9rem;
       border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
     }
 
     @media (max-width: 900px) {
@@ -280,9 +358,9 @@
     .countdown {
       position: fixed;
       top: 18px;
-      right: 130px; /* sits left of the right socialbar (100px) with spacing */
+      right: 18px;
       display: flex;
-      gap: 10px;
+      gap: 15px;
       align-items: center;
       z-index: 11;
       color: var(--gold);
@@ -293,7 +371,7 @@
       backdrop-filter: blur(8px);
       background: rgba(0,0,0,0.25);
       border-radius: 12px;
-      padding: 8px 12px;
+      padding: 12px 20px;
       border: 1px solid rgba(255,185,66,0.12);
     }
 
@@ -319,19 +397,23 @@
     }
 
     @media (max-width: 600px) {
-      .countdown { right: 16px; top: 12px; padding: 6px 8px; }
-      .countdown .value { font-size: 0.95rem; }
-      .countdown .label { display: none; }
+      .countdown { padding: 12px 20px; gap: 10px; }
+      .countdown .value { font-size: 1rem; }
+      .countdown .label { font-size: 0.5rem; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Background Video -->
-  <video class="bg-video" autoplay muted loop>
-    <source src="bg.mp4" type="video/mp4" />
-  </video>
+  <!-- Background Image -->
+  <div class="bg-image"></div>
+
+  <!-- Splash Screen -->
+  <div id="splash-screen" class="splash-screen">
+    <img src="logo.png" class="splash-logo" alt="Resurgence Logo" />
+    <div class="splash-text" id="splash-text"></div>
+  </div>
 
   <!-- Countdown Timer (top-right) -->
   <div id="countdown" class="countdown" aria-live="polite" role="status">
@@ -377,12 +459,12 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <!-- <img src="logo.jpeg" alt="Resurgence Logo" /> -->
+    <img src="logo.png" class="logo-header" alt="Resurgence Logo" />
     <h1 class="hero-title">
       <span class="main" id="hero-main" aria-hidden="false"></span>
       <span class="sub" id="hero-sub" aria-hidden="true">Cultural Fest</span>
     </h1>
-    <p>Experience the rebirth of art, music, and creativity at Shri Mata Vaishno Devi University’s most awaited cultural extravaganza.  
+    <p>Experience the rebirth of art, music, and creativity at Shri Mata Vaishno Devi University's most awaited cultural extravaganza.  
     A celebration of talent, rhythm, and colors — Resurgence 2025 awaits you!</p>
     <div class="dates">19<sup>th</sup> - 30<sup>th</sup> November 2025</div>
 
@@ -486,6 +568,236 @@
         // make sub accessible
         sub.setAttribute('aria-hidden', 'false');
       }, baseInterval * len + 200);
+    })();
+
+    // Splash screen animation and fade
+    (function() {
+      const splashScreen = document.getElementById('splash-screen');
+      const splashText = document.getElementById('splash-text');
+      const text = 'Resurgence-25';
+      const words = text.split(' ');
+      
+      if (!splashScreen || !splashText) return;
+
+      const totalMs = 1400; // animate text over ~1.4s during 2s splash
+      const baseInterval = totalMs / words.length;
+
+      // Animate word-by-word with pop animation
+      words.forEach((word, idx) => {
+        setTimeout(() => {
+          if (idx > 0) {
+            // Add space before word (except first)
+            const space = document.createElement('span');
+            space.textContent = ' ';
+            splashText.appendChild(space);
+          }
+          
+          // Add each word
+          const span = document.createElement('span');
+          span.className = 'char';
+          span.textContent = word;
+          splashText.appendChild(span);
+          requestAnimationFrame(() => span.classList.add('show'));
+        }, baseInterval * idx);
+      });
+
+      // After 2 seconds, fade out splash and show main page
+      setTimeout(() => {
+        splashScreen.classList.add('hidden');
+        // Start the hero heading animation after splash fades
+        setTimeout(() => {
+          const heroTarget = document.getElementById('hero-main');
+          if (heroTarget) {
+            heroTarget.textContent = '';
+            const heroSub = document.getElementById('hero-sub');
+            if (heroSub) heroSub.classList.remove('show');
+          }
+        }, 200);
+      }, 2000);
+    })();
+
+    // Interactive background color on cursor movement and scroll
+    (function() {
+      const bgImage = document.querySelector('.bg-image');
+      const canvas = document.createElement('canvas');
+      canvas.className = 'bg-canvas';
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      bgImage.appendChild(canvas);
+
+      const ctx = canvas.getContext('2d');
+      
+      // Color palette
+      const colors = {
+        orange: '#FF4500',      // Flame Orange
+        yellow: '#FFD700',      // Golden Yellow
+        red: '#8B0000',         // Deep Red
+        black: '#1C1C1C',       // Charcoal Black
+        white: '#FFFFFF'        // White accent
+      };
+
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let scrollY = 0;
+      let time = 0;
+      let phoenixParticles = [];
+
+      // Initialize phoenix flame particles
+      function initPhoenixParticles() {
+        phoenixParticles = [];
+        for (let i = 0; i < 50; i++) {
+          phoenixParticles.push({
+            x: Math.random() * canvas.width,
+            y: canvas.height + Math.random() * 100,
+            vx: (Math.random() - 0.5) * 3,
+            vy: -Math.random() * 4 - 2,
+            life: 0,
+            maxLife: Math.random() * 200 + 100,
+            size: Math.random() * 40 + 20,
+            color: [colors.orange, colors.yellow, colors.red][Math.floor(Math.random() * 3)],
+            rotation: Math.random() * Math.PI * 2
+          });
+        }
+      }
+      initPhoenixParticles();
+
+      // Track mouse
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      // Track scroll
+      window.addEventListener('scroll', () => {
+        scrollY = window.scrollY;
+      });
+
+      // Handle resize
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      function drawPhoenixShape(x, y, size, opacity, rotation) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        ctx.fillStyle = ctx.createRadialGradient(0, 0, 0, 0, 0, size);
+        ctx.fillStyle = this.color || colors.orange;
+        
+        // Draw flame-like shape (phoenix feather)
+        ctx.globalAlpha = opacity;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, size * 0.6, size, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Add inner glow
+        ctx.fillStyle = colors.yellow;
+        ctx.globalAlpha = opacity * 0.6;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, size * 0.3, size * 0.7, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.restore();
+      }
+
+      function draw() {
+        // Clear canvas with dark background
+        ctx.fillStyle = colors.black;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        time++;
+
+        // Draw phoenix flame particles rising from bottom
+        phoenixParticles.forEach((p, idx) => {
+          p.life++;
+
+          // Reset dead particles at bottom
+          if (p.life > p.maxLife) {
+            p.life = 0;
+            p.x = Math.random() * canvas.width;
+            p.y = canvas.height + Math.random() * 50;
+            p.vy = -Math.random() * 4 - 2;
+            p.color = [colors.orange, colors.yellow, colors.red][Math.floor(Math.random() * 3)];
+            p.rotation = Math.random() * Math.PI * 2;
+          }
+
+          // Move upward (rising flame effect)
+          p.y += p.vy;
+          p.x += p.vx + Math.sin(time * 0.02 + idx) * 0.5;
+          p.rotation += 0.05;
+
+          // Calculate opacity (fade out as rises)
+          const opacity = 1 - (p.life / p.maxLife);
+
+          // Draw flame glow
+          const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+          gradient.addColorStop(0, p.color + 'FF');
+          gradient.addColorStop(0.5, p.color + '80');
+          gradient.addColorStop(1, p.color + '00');
+
+          ctx.fillStyle = gradient;
+          ctx.globalAlpha = opacity * 0.7;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Add white hot core
+          ctx.fillStyle = colors.white;
+          ctx.globalAlpha = opacity * 0.4 * (p.life / p.maxLife > 0.5 ? 1 - (p.life / p.maxLife - 0.5) * 2 : 1);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Draw phoenix wings effect near mouse
+        const wingSize = 100 + Math.sin(time * 0.05) * 30;
+        
+        // Left wing glow
+        const leftWingGradient = ctx.createRadialGradient(mouseX - 150, mouseY, 0, mouseX - 150, mouseY, wingSize);
+        leftWingGradient.addColorStop(0, colors.orange + '40');
+        leftWingGradient.addColorStop(0.5, colors.red + '20');
+        leftWingGradient.addColorStop(1, colors.black + '00');
+        ctx.fillStyle = leftWingGradient;
+        ctx.fillRect(mouseX - 150 - wingSize, mouseY - wingSize, wingSize * 2, wingSize * 2);
+
+        // Right wing glow
+        const rightWingGradient = ctx.createRadialGradient(mouseX + 150, mouseY, 0, mouseX + 150, mouseY, wingSize);
+        rightWingGradient.addColorStop(0, colors.yellow + '40');
+        rightWingGradient.addColorStop(0.5, colors.orange + '20');
+        rightWingGradient.addColorStop(1, colors.black + '00');
+        ctx.fillStyle = rightWingGradient;
+        ctx.fillRect(mouseX + 150 - wingSize, mouseY - wingSize, wingSize * 2, wingSize * 2);
+
+        // Central phoenix core at cursor
+        const coreGradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 80);
+        coreGradient.addColorStop(0, colors.yellow + 'AA');
+        coreGradient.addColorStop(0.4, colors.orange + '70');
+        coreGradient.addColorStop(1, colors.red + '00');
+        ctx.fillStyle = coreGradient;
+        ctx.globalAlpha = 1;
+        ctx.fillRect(mouseX - 80, mouseY - 80, 160, 160);
+
+        // Add pulsing white accent
+        ctx.fillStyle = colors.white;
+        ctx.globalAlpha = 0.3 + Math.sin(time * 0.08) * 0.2;
+        ctx.beginPath();
+        ctx.arc(mouseX, mouseY, 30 + Math.sin(time * 0.06) * 10, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Scroll influence - intensify colors on scroll
+        if (scrollY > 0) {
+          const scrollIntensity = Math.min(scrollY / 500, 0.8);
+          ctx.fillStyle = colors.red;
+          ctx.globalAlpha = scrollIntensity * 0.3;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      }
+
+      draw();
     })();
   </script>
 </body>
