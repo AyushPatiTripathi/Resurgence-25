@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./styles/landing.css" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/contact.css" />
+    <link rel="stylesheet" href="./styles//about.css" />
+    <link rel="stylesheet" href="./styles/loader.css" />
+    <link rel="stylesheet" href="./styles/video.css" />
+    <link rel="stylesheet" href="./styles/spons.css" />
+    <link rel="stylesheet" href="./styles/events.css" />
+    <link rel="stylesheet" href="./styles/developers.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Bitter&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="images/icons/Resurgence-favicon.png" type="image/x-icon">
+    <title>RESURGENCE'25</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-14236414-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-14236414-1');
+    </script>
+
+</head>
+
+<body>
+    <div id="loader-wrapper" style="overflow: hidden">
+        <div id="main-loader">
+            <div class="ring el-1"></div>
+            <div class="ring el-2"></div>
+            <div class="ring el-3"></div>
+            <div class="ring el-4"></div>
+            <div class="ring el-5"></div>
+            <div class="ring el-6"></div>
+            <div class="ring el-7"></div>
+            <div class="ring el-8"></div>
+            <div class="ring el-9"></div>
+            <div class="ring el-10"></div>
+            <div class="ring el-11"></div>
+            <div class="ring el-12"></div>
+            <div class="ring el-13"></div>
+            <div class="ring el-14"></div>
+            <div class="ring el-15"></div>
+            <div class="ring el-15"></div>
+            <div class="ring el-15"></div>
+            <div class="ring el-15"></div>
+        </div>
+        <div id="oasis-text">
+            <div id="oasis-title">
+                <ul>
+                    <li class="oasis-li li-1">R</li>
+                    <li class="oasis-li li-2">E</li>
+                    <li class="oasis-li li-3">S</li>
+                    <li class="oasis-li li-4">U</li>
+                    <li class="oasis-li li-5">R</li>
+                    <li class="oasis-li li-6">G</li>
+                    <li class="oasis-li li-7">E</li>
+                    <li class="oasis-li li-8">N</li>
+                    <li class="oasis-li li-9">C</li>
+                    <li class="oasis-li li-10">E</li>
+                    <li class="oasis-li li-11">'</li>
+                    <li class="oasis-li li-12">2</li>
+                    <li class="oasis-li li-13">5</li>
+                </ul>
+            </div>
+            <div id="oasis-slogan">
+                  Ignite.Compete.Conquer
+            </div>
+              
+        </div>
+        <div id="oasis-date">
+            <!-- 19<sup>th</sup> Oct - 23<sup>rd</sup> Oct -->
+        </div>
+    </div>
+
+    <div class="navigation">
+        <div class="Resurgence-logo" onclick="navigate(0)">
+        <img src="./images/assets/logo_final_20.png" class="logo-img">
+        </div>
+        <div class="menu-back" onclick="closeNav()"></div>
+        <div class="nav-item" onclick="navigate(0)">HOME</div>
+        <div class="nav-item" onclick="navigate(1)">ABOUT US</div>
+        <div class="nav-item" onclick="openTags('sponsors')">SPONSORS</div>
+        <div class="nav-item" onclick="openTags('past-sponsors')">PAST SPONSORS</div>
+        <div class="nav-item" onclick="openTags('events')">EVENTS</div>
+        
+        <div class="nav-item" onclick="navigate(2)">VIDEOS</div>
+        <div class="nav-item"><a href="./gallery.html">GALLERY</a></div>
+        <div class="nav-item"><a href="#">TEAM</a></div>
+        <div class="nav-item"><a href="#/"></a></div>
+        <div class="nav-item" onclick="navigate(3)">CONTACT US</div>
+        <div class="nav-item" onclick="openTags('developers')">DEVELOPERS</div>
+
+        <div class="dummy-ham-icon"></div>
+  
+        <div class="social-links">
+            <div class="nav-asset"></div>
+            <a href="https://www.facebook.com/oasis.bitspilani/" target="blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/bitsoasis/?hl=en" target="blank"><i class="fab fa-instagram"></i></a>
+            <div class="nav-asset"></div>
+        </div>
+    </div>
+
+
+    <div class="toggle-icon">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div><!-- /toggle-icon -->
+
+    <div class="side-bar">
+            <div class="nav-item" onclick="navigate(0)">HOME</div>
+            <div class="nav-item" onclick="navigate(1)">ABOUT US</div>
+            <div class="nav-item" onclick="openTags('sponsors')">SPONSORS</div>
+            <div class="nav-item" onclick="openTags('past-sponsors')">PAST SPONSORS</div>
+            <div class="nav-item" onclick="openTags('events')">EVENTS</div>
+            <!-- <div class="nav-item"><a href="https://bits-oasis.org/registrations/login/">LOGIN</a></div> -->
+            <div class="nav-item" onclick="navigate(2)">VIDEOS</div>
+            <div class="nav-item"><a href="./gallery.html">GALLERY</a></div>
+            <div class="nav-item"><a href="/">TEAM</a></div>
+            <div class="nav-item"><a href="hs/">P</a></div>
+            <div class="nav-item" onclick="navigate(3)">CONTACT US</div>
+            <div class="nav-item" onclick="openTags('developers')">DEVELOPERS</div>
+    </div>
+
+    <div id="hamburger" onclick="openNav()"></div>
+    
+
+    <div class="landing-wrapper" id="home">
+        <div class="Resurgence-landing-container">
+            <!-- <img src="images/assets/oasist.png" class="oasis-landing"> -->
+            <div class="Resurgence-landing landing-text">
+                <div id="landing-1">WELCOME TO </div>
+                <div id="landing-2">RESURGENCE-25</div>
+                <div id="landing-3">IGNITE.COMPETE.CONQUER.</div>
+            </div>
+
+            <div class="mobile-register">
+                <a href="./leaderboard.html">LeaderBoard</a>
+                <a href="#">Be The Phoenix</a>
+            </div>
+              <!-- right-column emblem retained as optional content area -->
+      <div style="width:320px; display:flex; align-items:center; justify-content:center">
+        <div style="width:220px; height:220px; border-radius:50%; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,122,89,0.02)); display:flex; align-items:center; justify-content:center; box-shadow: 0 10px 60px rgba(0,0,0,0.6);">
+          <div style="font-family:Playfair Display, serif; font-size:26px; color:rgba(255,255,255,0.85); text-align:center">Phoenix<br/>Emblem</div>
+        </div>
+      </div>
+        </div>
+    
+ 
+ 
+ </div> 
+ <div class="Game-button">
+<a href="#" class="round-button"></a>
+</div>
+
+    <div class="about" id="about" name="about">
+        <div id="fog"></div>
+        <div class="lightning flashit"></div>
+        <div class="content">
+
+            <div class="about-heading">
+                <span>
+                    ABOUT US
+                </span>
+            </div>
+            <div class="about-text">
+            Welcome to Resurgence, the grand cultural celebration of Shri Mata Vaishno Devi University, the oldest and largest fest of our campus. From 19 November to 3 December, five competitive houses will go head-to-head in high-voltage events spanning dance, music, theatre, art, literary battles and more. This year’s emblem, the phoenix, stands for revival, reinvention and rising from every challenge. Just like that mythical bird, Resurgence invites everyone to soar above yesterday’s limits, ignite fresh energy and redefine what we can achieve as creators, competitors and community. It’s about finding strength in the face of challenges, celebrating the passion that keeps us moving, and carrying the courage to begin again, burn brighter, and turn every fall into flight. Resurgence isn’t just about winning a title; it’s about the thrill of participation, the friendships forged in chaos, and the stories that outlive the stage lights. So whether you’re stepping onto stage, wielding a paintbrush, dropping lines in a debate or cheering from the sidelines, come join the thrill, throw yourself into the contest, and help make this edition unforgettable.
+            </div>
+        </div>
+    
+        <div class="video-wrapper" id="videos">
+            <div class="video-heading">
+                <span>VIDEOS</span>
+            </div>
+            <div class="cards-container">
+                <div class="arrow-left">
+                    <div class="image"></div>
+                </div>
+                <div class="arrow-right">
+                    <div class="image"></div>
+                </div>
+
+                <div class="cards cards-left">
+                    <iframe class="thumbnail" src="https://www.youtube.com" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="info">
+                        <div class="info-heading"><a href="https://www.youtube.com" target="blank">RESURGENCE'19 TEASER</a></div>
+                    </div>
+                </div>
+
+                <div class="cards cards-right">
+                    <iframe class="thumbnail" src="https://www.youtube.com/embed/kw2MVtXWS4o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="info">
+                        <div class="info-heading">
+                            <a href="https://www.youtube.com/watch?v=ewHo-yr7rIw" target="blank">Resurgence'19 </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cards cards-left">
+                    <iframe class="thumbnail" src="https://www.youtube.com/embed/oWDZY6y7ED8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="info">
+                        <div class="info-heading">
+                            <a href="https://www.youtube.com/" target="blank">RESURGENCE'18 TEASER</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cards cards-right">
+                    <iframe class="thumbnail" src="https://www.youtube.com/" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="info">
+                        <div class="info-heading"><a href="https://www.youtube.com/" target="blank">RESURGENCE'17 TEASER</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Contact-div" id="contacts">
+            <div class="Contact-heading">
+                <span>CONTACT US</span>
+            </div>
+            <div class="contact-card-container">
+                <div class="arrow-left-contact">
+                    <div class="image"></div>
+                </div>
+                <div class="arrow-right-contact">
+                    <div class="image"></div>
+                </div>
+
+                <div class="Cards-div">
+                    <div class="des-card">
+                        <img class="prof-pic"></img>
+                        <div class="name"><span>G</span></div>
+                        <div class="position"><span>G</span></div>
+                        <div class="phone-no"><span>+5</span></div>
+                        <div class="email"><span>g</span></div>
+                        <div class="dash"></div>
+                    </div>
+                    <div class="des-card">
+                        <img class="prof-pic"></img>
+                        <div class="name"><span>K</span></div>
+                        <div class="position"><span>L</span></div>
+                        <div class="phone-no"><span>+91</span></div>
+                        <div class="email"><span>cg</span></div>
+                        <div class="dash"></div>
+                    </div>
+                    <div class="des-card">
+                        <img class="prof-pic"></img>
+                        <div class="name"><span>S</span></div>
+                        <div class="position"><span>Sponsorship and Marketing</span></div>
+                        <div class="phone-no"><span>+91 8317332421</span></div>
+                        <div class="email"><span>s</span></div>
+                        <div class="dash"></div>
+                    </div>
+                    <div class="des-card">
+                        <img class="prof-pic"></img>
+                        <div class="name"><span>Abi</span></div>
+                        <div class="position"><span>We</span></div>
+                        <div class="phone-no"><span>+9</span></div>
+                        <div class="email"><span>we</span></div>
+                        <div class="dash"></div>
+                    </div>
+                    <div class="des-card">
+                        <img class="prof-pic"></img>
+                        <div class="name"><span>Ai</span></div>
+                        <div class="position"><span>Ony</span></div>
+                        <div class="phone-no"><span>+98</span></div>
+                        <div class="email"><span>cog</span></div>
+                        <div class="dash"></div>
+                    </div>
+                    <div class="des-card">
+                        <img class="prof-pic"></img>
+                        <div class="name"><span>Sidl</span></div>
+                        <div class="position"><span>Rec</span></div>
+                        <div class="phone-no"><span>+9</span></div>
+                        <div class="email"><span>recnacc@bits-oasis.org</span></div>
+                        <div class="dash"></div>
+                    </div>
+                    <div class="des-card">
+                        <img class="prof-pic"></img>
+                        <div class="name"><span>Harsh Shukla</span></div>
+                        <div class="position"><span>Student Union President</span></div>
+                        <div class="phone-no"><span>+91 7390967807</span></div>
+                        <div class="email"><span>President@pilani.bits-pilani.ac.in</span></div>
+                        <div class="dash"></div>
+                    </div>
+                    <!-- <div class="des-card">
+                        <img class="prof-pic"></img>
+                        <div class="name"><span>V Abishek Balaji</span></div>
+                        <div class="position"><span>Student Union General Secretary</span></div>
+                        <div class="phone-no"><span>+91 9566142660</span></div>
+                        <div class="email"><span>gensec@pilani.bits-pilani.ac.in</span></div>
+                        <div class="dash"></div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="footer-div">
+                <!-- <span>Department of Visual Media ,BITS Pilani</span> -->
+                <span>FOLLOW US ON
+                    <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com//" target="_blank"><i class="fab fa-instagram"></i></a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="events" id="events">
+        <div class="event-arrow" onclick="navigateEvent(eventIndex - 1)"></div>
+        <div class="event-arrow" onclick="navigateEvent(eventIndex + 1)"></div>
+        <div class="events-heading">
+            <span>EVENTS</span>
+        </div>
+        <div class="events-wrapper">
+            <div class="events-container"></div>
+        </div>
+        <div class="events-nav-dots"></div>
+        <div class="all-events-type-button" onclick="showAllEvents()"><span>ALL CATEGORIES</span></div>
+    </div>
+
+
+    <div class="event-details" id="event-details">
+        <div class="event-details-bg"></div>
+        <div class="event-details-wrapper">
+            <img src="images/icons/close.png" class="close-event" onclick="closeEventDetails()">
+            <div id="all-events-tab">
+                <div class="event-type">
+                    Event Type
+                </div>
+                <hr size="3px" width="10%" color="#9A6D9A" />
+                <div class="all-events">
+                <!-- ALL EVENTS OF A PARTICULAR TYPE GOES HERE -->
+                </div>
+            </div>
+            <div id="event-details-tab">
+                <img src="images/icons/menu-back.png" class="events-back" onclick="backEventDetails()" />
+                <div class="event-detail-name">
+                    Event name
+                </div>
+                <hr size="3px" width="10%" color="#9A6D9A" />
+                <div class="event-detail">
+                    <span class="event-day">
+                        Day: <span>EventDay</span>
+                    </span>
+                    <span class="event-time">
+                        Time: <span>Event PM</span>
+                    </span>
+                    <span class="event-venue">
+                        Venue: <span>Event 6000</span>
+                    </span>
+                </div>
+                <div class="event-description">
+                    <!-- EVENT DESCRIPTION  GOES  HERE -->
+                </div>
+                <div class="event-contact">
+                    <div>Contact</div>
+                    <div>
+                        <!-- CONTACT GOES  HERE -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="all-events-type">
+        <img src="images/icons/menu-back.png" class="events-back" onclick="backAllEvents()" />
+        <div class="all-events-type-heading"><span>ALL CATEGORIES</span></div>
+        <div class="all-events-type-container">
+            <!-- ALL EVENTS CATEGORIES GOES HERE -->
+        </div>
+    </div>
+
+
+
+
+    <div class="developers" id="developers">
+        <div class="developers-heading">
+            <span>DEVELOPERS</span>
+        </div>
+        <div class="developers-container">
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Devansh Agarwal</div>
+                    <div id="separator"></div>
+                    <div id="team">UI/UX Designer</div>
+                    <div id="links">
+                        <div style="z-index: 6000"><a href="https://www.behance.net/devanshag" target="blank"><i class="fab fa-behance"></i></a></div>
+                        <div style="z-index: 6000"><a href="https://dribbble.com/Devansh22" target="blank"><i class="fab fa-dribbble"></i></a></div>
+                        <div style="z-index: 6000"><a href="https://www.instagram.com/devansh_ag_/" target="blank" style="z-index: 6000"><i class="fab fa-instagram"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Mukul Gupta</div>
+                    <div id="separator"></div>
+                    <div id="team">Frontend Developer</div>
+                    <div id="links">
+                        <div><a href="https://github.com/mukul0596" target="blank"><i class="fab fa-github"></i></a></div>
+                        <div><a href="https://www.linkedin.com/in/mukul-gupta-7931b4171/" target="blank"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Chirag Singhal</div>
+                    <div id="separator"></div>
+                    <div id="team">Frontend Developer</div>
+                    <div id="links">
+                        <div><a href="https://github.com/chirag-singhal" target="blank"><i class="fab fa-github"></i></a></div>
+                        <div><a href="https://www.linkedin.com/in/chirag-singhal-389a6a16a/" target="blank"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Anant Verma</div>
+                    <div id="separator"></div>
+                    <div id="team">UI/UX Designer</div>
+                    <div id="links">
+                        <!-- <div><a href="" target="blank"><i class="fab fa-behance"></i></a></div> -->
+                        <div><a href="https://www.instagram.com/anantverma275/" target="blank"><i class="fab fa-instagram"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Shivanshu Ayachi</div>
+                    <div id="separator"></div>
+                    <div id="team">Backend Developer</div>
+                    <div id="links">
+                        <div><a href="http://www.github.com/shivanshu1234" target="blank"><i class="fab fa-github"></i></a></div>
+                        <div><a href="http://www.linkedin.com/in/shivanshuayachi" target="blank"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Mohul Maheshwari</div>
+                    <div id="separator"></div>
+                    <div id="team">UI/UX Designer</div>
+                    <div id="links">
+                        <div><a href="https://dribbble.com/moshino44" target="blank"><i class="fab fa-dribbble"></i></a></div>
+                        <div><a href="https://www.goluggagefree.com" target="blank"><i class="fab fa-instagram"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Abhinav Tiwari</div>
+                    <div id="separator"></div>
+                    <div id="team">Backend Developer</div>
+                    <div id="links">
+                        <div><a href="https://github.com/abhinav824" target="blank"><i class="fab fa-github"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Pradyumna Bang</div>
+                    <div id="separator"></div>
+                    <div id="team">Backend Developer</div>
+                    <div id="links">
+                        <div><a href="https://github.com/bangpradyumna/" target="blank"><i class="fab fa-github"></i></a></div>
+                        <div><a href="https://www.linkedin.com/in/pradyumna-bang-28011b168/" target="blank"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Anupam Srivastava</div>
+                    <div id="separator"></div>
+                    <div id="team">Frontend Developer</div>
+                    <div id="links">
+                        <div><a href="https://github.com/meliodas113" target="blank"><i class="fab fa-github"></i></a></div>
+                        <div><a href="https://www.linkedin.com/in/anupam-srivastava-9b6369186/" target="blank"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Shreyans Jain</div>
+                    <div id="separator"></div>
+                    <div id="team">Frontend Developer</div>
+                    <div id="links">
+                        <div><a href="https://github.com/jshreyans551" target="blank"><i class="fab fa-github"></i></a></div>
+                        <div><a href="https://www.linkedin.com/in/shreyans-jain-7a02aa169" target="blank"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Akshit Patel</div>
+                    <div id="separator"></div>
+                    <div id="team">Frontend Developer</div>
+                    <div id="links">
+                        <div><a href="https://github.com/Akshit-Patel" target="blank"><i class="fab fa-github"></i></a></div>
+                        <div><a href="https://www.linkedin.com/in/akshit-patel-39075476/" target="blank"><i class="fab fa-linkedin"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Manikya Varshney</div>
+                    <div id="separator"></div>
+                    <div id="team">UI/UX Designer</div>
+                    <div id="links">
+                        <!-- <div><a href="" target="blank"><i class="fab fa-behance"></i></a></div> -->
+                        <div><a href="https://www.instagram.com/manikya.varshney/" target="blank"><i class="fab fa-instagram"></i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="developer">
+                <div class="dev-image"></div>
+                <div class="dev-info">
+                    <div id="name">Divyansh Agarwal</div>
+                    <div id="separator"></div>
+                    <div id="team">Backend Developer</div>
+                    <div id="links">
+                        <div><a href="https://github.com/Senpai1199" target="blank"><i class="fab fa-github"></i></a></div>
+                        <!-- <div><a href="https://www.linkedin.com/in/akshit-patel-39075476/" target="blank"><i class="fab fa-linkedin"></i></a></div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="spons-wrapper" id="sponsors">
+        <div class="spons-heading">
+            <span>SPONSORS</span>
+        </div>
+        <div class="spons-container">
+            <div class="spons">
+                <div class="sponsor">
+                    <div class="sponsor-heading">INDUSTRY TRAINING PARTNER</div>
+                        <div class="sponsor-card-container">
+                            <div class="spons-details">
+                                <a href="http://www.inmovidutech.com/" id="logo" target="_blank">                                
+                                <img src="images/spons/present/Inmovidu Logo.png">
+                                <div class="name">Inmovidu</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>            
+    </div>
+    <div class="spons-wrapper" id="past-sponsors">
+        <div class="spons-heading">
+            <span>PAST SPONSORS</span>
+        </div>
+        <div class="spons-container">
+            <!-- <div class="spons-tab-container">
+                <div class="spons-tab"><span onclick="toggleSponsTab('spons')">SPONSORS</span></div>
+                <div class="past-spons-tab"><span class="active" onclick="toggleSponsTab('past-spons')">PAST SPONSORS</span></div>
+            </div> -->
+
+            <div class="spons">
+                <div class="sponsor">
+                    <div class="sponsor-heading">TITLE SPONSORS</div>
+                        <div class="sponsor-card-container">
+                            <div class="spons-details">
+                                <a href="https://www.cisco.com/c/en_in/index.html" id="logo" target="_blank">                                
+                                <img src="images/spons/cisco_blue_transparent.png">
+                                <div class="name">Cisco</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sponsor">
+                    <div class="sponsor-heading">ASSOCIATE TITLE SPONSORS and OFFICIAL SMARTPHONE PARTNER</div>
+                    <div class="sponsor-card-container">
+                        <div class="spons-details">
+                            <a href="https://www.realme.com/in/" id="logo" target="_blank">                                                            
+                            <img src="images/spons/Realme-realme--logo-box-CMYK.png">
+                            <div class="name">Realme</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sponsor">
+                    <div class="sponsor-heading">INDIE NIGHT PARTNER</div>
+                    <div class="sponsor-card-container">
+                        <div class="spons-details">
+                            <a href="https://www.realme.com/in/" id="logo" target="_blank">                            
+                            <img src="images/spons/skillbox_white.png">
+                            <div class="name">Skillbox</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sponsor">
+                    <div class="sponsor-heading">ONLINE MEDIA PARTNER</div>
+                    <div class="sponsor-card-container">
+                        <div class="spons-details"><img src="images/spons/The Indian Music Diaries - Online Media Partner.jpg">
+                            <div class="name">The Indian Music Diaries</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sponsor">
+                    <div class="sponsor-heading">OFFICIAL FOOTWEAR PARTNER</div>
+                    <div class="sponsor-card-container">
+                        <div class="spons-details"><img src="images/spons/Official_Footwear_Partner_150x.jpg">
+                            <div class="name">Sparx</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sponsor">
+                    <div class="sponsor-heading">OFFICIAL POKER PARTNER</div>
+                    <div class="sponsor-card-container">
+                        <div class="spons-details">
+                            <a href="https://www.spartanpoker.com/" id="logo" target="_blank">                                                        
+                            <img src="images/spons/poker-partner.png">
+                            <div class="name">Spartan</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sponsor">
+                    <div class="sponsor-heading">OFFICIAL MEDIA SPONSORS</div>
+
+                    <div class="sponsor-card-container">
+                        <div class="spons-details">
+                            <a href="https://www.firstpost.com/" id="logo" target="_blank">                                                  
+                            <img src="images/spons//firstpost.png">Your logo name
+                            <div class="name">Firstpost</div>
+                            </a>
+                        </div>
+                            <a href="https://www.news18.com/" id="logo" target="_blank">                                                  
+                            <div class="spons-details"><img src="images/spons/news18-logo-200x200_n.png">
+                            <div class="name">News18</div>
+                            </a>
+                        </div>
+                        <div class="spons-details">
+                            <!-- <a href="https://www.cisco.com/c/en_in/index.html" id="logo" target="_blank">                                                                               -->
+                            <img src="images/spons/YourStory_Logo-02 (2).png">
+                            <div class="name">YourStory</div>
+                            <!-- </a> -->
+                        </div>
+                        <div class="spons-details">
+                            <img src="images/spons/HBRAscend_Logo-1024x379.png">
+                            <div class="name">HBR Ascend</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/1698709.png">
+                            <div class="name">Dare2Compete</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/DUB_logo.png">
+                            <div class="name">DU Beat</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/DUExpress_logo.png">
+                            <div class="name">DU Express</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/HI-Logo-PNG.png">
+                            <div class="name">Hello Intern</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/icf-logo-2020.png">
+                            <div class="name">India College Fest</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/Logo_300_100.png">
+                            <div class="name">Knowafest</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/du_updates.jpg">
+                            <div class="name">DU Updates</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/ndt-logo.png">
+                            <div class="name">New Delhi Times</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/pg_logo_landscape.png">
+                            <div class="name">PaGalGuy</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/Education tree.png">
+                            <div class="name">Education Tree</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/unnamed.jpg">
+                            <div class="name">Aapka Times</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/IndianNewsAndTimes-logo-600x600.jpg">
+                            <div class="name">Indian News and Times</div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <div class="sponsor">
+                    <div class="sponsor-heading">CELEBRITY PARTNER</div>
+                    <div class="sponsor-card-container">
+                        <div class="spons-details"><img src="images/spons/dearc.png">
+                            <div class="name"> DEARC Entertainment</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sponsor">
+                    <div class="sponsor-heading">OTHER SPONSORS</div>
+                    <div class="sponsor-card-container">
+                        <div class="spons-details"><img src="images/spons/entertainment-quiz---associate.png">
+                            <div class="name">Redwolf</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/hrc_logo_white6.png">
+                            <div class="name">Hard Rock Cafe</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/sdj-logo-without-url.jpg">
+                            <div class="name">Surat Diamond Jewellery</div>
+                        </div>
+
+                        <div class="spons-details"><img src="images/spons/bisleri-square-logo.jpg">
+                            <div class="name">Bisleri</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/copy-of-topcat-logo.png">
+                            <div class="name">Topcat</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/cornitos-logo-standard-3.png">
+                            <a href="https://www.cornitos.in/" id="logo" target="_blank">                             
+                            <div class="name">Cornitos</div>
+                            </a>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/ice-tea-partner.png">
+                            <a href="http://www.thebrewhouse.in/" id="logo" target="_blank"> 
+                            <div class="name">Brew House</div>
+                            </a>
+                        </div>
+                        <div class="spons-details">
+                            <a href="https://creambell.com/" id="logo" target="_blank">                             
+                            <img src="images/spons/creambell-logo_for-web_3.jpg">
+                            <div class="name">Creambell</div>
+                            </a> 
+                        </div>
+                        <div class="spons-details"><img src="images/spons/logo-with-trade-mark(1).jpg">
+                            <div class="name">Wrogn</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/offbeat-horizontal-logo.png">
+                            <div class="name">Offbeat</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/wiley-logo-black.jpg">
+                            <div class="name">Wiley</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/HRC_LOGO_WHITE3.png">
+                            <div class="name">Hard Rock Cafe</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/MIO logo.png">
+                            <div class="name">Miss India Orgaiztion</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/i-con.jpg">
+                            <div class="name">i-con saloon</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/AxisBank.png">
+                            <div class="name">Axis Bank</div>
+                        </div>
+                        <div class="spons-details"><img src="images/spons/Zebronics.jpg">
+                            <div class="name">Zebronics</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+                            
+    <div class="backdrop" onclick="if (window.innerWidth < 600) { closeNav() } else { toggleDesktopHam() }"></div>
+</body>
+<script src="./js/index.js"></script>
+<script src="./js/video.js"></script>
+<script src="./js/contact.js"></script>
+<script src="./js/events.js"></script>
+
+</html>

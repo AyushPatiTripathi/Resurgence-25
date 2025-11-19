@@ -1,0 +1,110 @@
+html {
+    scroll-behavior: smooth;
+    overflow: hidden;
+    /* -webkit-overflow-scrolling: touch; */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #000000;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+@font-face {
+    font-family: "lucida";
+    src: url("../fonts/lucida\ sans\ unicode.ttf");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "ikaros-light";
+    src: url("../fonts/Ikaros-Light.otf");
+}
+
+@font-face {
+    font-family: "ikaros";
+    src: url("../fonts/Ikaros-Regular.otf");
+}
+
+@font-face {
+    font-family: "Ikaros-Sans";
+    src: url("../fonts/IR.otf");
+}
+
+@font-face {
+    font-family: "berlin-sans";
+    src: url("../fonts/bsf.ttf");
+}
+
+@font-face {
+    font-family: "Haarlem";
+    src: url("../fonts/Haarlem\ Deco\ DEMO.ttf");
+}
+
+@font-face {
+    font-family: "sf-ui";
+    src: url("../fonts/sf-ui-display-medium-58646be638f96.otf");
+}
+
+@font-face {
+    font-family: 'sf-reg';
+    src: url('../fonts/SF-Pro-Text-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'nobel gas';
+    src: url('../fonts/NobleGaslights.otf');
+}
+
+@font-face {
+    font-family: 'google sans';
+    src: url('../fonts/ProductSans-Medium.woff');
+}
+
+@font-face {
+    font-family: 'Playfair';
+    src: url('../fonts/PlayfairDisplay-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: 'Arvo';
+    src: url('../fonts/Gilroy-FREE/Gilroy-FREE/Gilroy-Light.otf');
+}
+
+.backdrop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 19;
+    display: none;
+}
+
+
+@keyframes fadeIn {
+    form {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    form {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

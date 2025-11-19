@@ -1,0 +1,115 @@
+/* Background */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(90deg, #170026, #42006b, #8a006a);
+  
+  /* Background Image Add Here */
+  /* background: url("bg.jpg");  */
+  
+  color: white;
+}
+
+/* Container */
+.leaderboard-container {
+  width: 95%;
+  max-width: 1100px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* Title */
+.title {
+  font-size: 36px;
+  font-weight: 900;
+  text-shadow: 0 0 12px #ff6bff;
+  margin-bottom: 25px;
+}
+
+/* Scroll wrapper */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Table */
+.leaderboard {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.leaderboard th {
+  padding: 14px;
+  font-size: 16px;
+  color: #ffb3ff;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.leaderboard td {
+  padding: 14px;
+  font-size: 16px;
+}
+
+/* Row styling */
+.leaderboard tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.leaderboard tbody tr:hover {
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+/* Team  with logo */
+.team {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.team img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ff8cff;
+}
+
+/* for  Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .leaderboard th,
+  .leaderboard td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .team img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .leaderboard th,
+  .leaderboard td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .team img {
+    width: 28px;
+    height: 28px;
+  }
+}

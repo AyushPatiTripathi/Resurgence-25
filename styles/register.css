@@ -1,0 +1,541 @@
+html {
+  overflow: auto;
+}
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: "Haarlem";
+  src: url("../fonts/Haarlem\ Deco\ DEMO.ttf");
+}
+
+@font-face {
+  font-family: "sf-ui";
+  src: url("../fonts/sf-ui-display-medium-58646be638f96.otf");
+}
+
+@font-face {
+  font-family: "SFpro";
+  src: url("../fonts/ProductSans-Medium.woff");
+}
+.text-type::-webkit-inner-spin-button,
+.text-type::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.msg-box {
+  position: absolute;
+  height: 50vh;
+  width: 50vw;
+  background-color: rgba(0, 0, 0, 0.9);
+  left: 50%;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  font-family: sf-ui;
+  font-size: 2em;
+  transform: translate(-50%, -50%) scale(0);
+  padding: 0 5% 0 5%;
+  transition: all 0.5s ease-in-out;
+  z-index: 1000;
+}
+
+.msg-box > span {
+  text-align: center;
+  color: #ffffff;
+  font-size: 0.7em;
+}
+
+.msg-box > .close-box {
+  font-size: 0.7em;
+  margin-top: 2vh;
+  background-image: linear-gradient(#be4dff, #4bb4fa);
+  padding: 1% 5% 1% 5%;
+  color: white;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.form-div {
+  height: 100vh;
+  width: 100%;
+  background-color: #00002e;
+  padding-top: 4vh;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.form-div > .heading {
+  color: #cbcbcb;
+  font-family: Haarlem;
+  font-size: 5em;
+  letter-spacing: 10px;
+  margin-left: 5vh;
+}
+
+.instructionsContainer{
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5vh;
+  /* background-color: red; */
+  flex-direction: column;
+  font-family: Haarlem;
+  color: white;
+}
+
+.regOver {
+  font-size: 36px;
+}
+
+.instructionsContainer > .instructionsHeading{
+  font-size: 3em;
+}
+
+.instructionsContainer > .instructionsSubHeading{
+  font-size: 2em;
+  width: 100%;
+  margin: 2vh 0;
+}
+
+.instructionsContainer > .textSet{
+  font-size: 1.4em;
+  line-height: 1.5;
+}
+
+.form-div > .back-btn {
+  float: right;
+  margin-right: 5vh;
+  color: white;
+  font-size: 3em;
+  transition: all 0.5s ease-in-out;
+}
+
+.form-div > .back-btn:hover {
+  transform: scale(1.2);
+}
+
+.form-div > .form-container {
+  width: 100%;
+  height: 62.5vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.input-el {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-flow: column;
+  /* background-color:  red; */
+}
+
+.input-el .text-type {
+  background-color: #02021b;
+  width: 60%;
+  padding: 2% 3% 2% 6%;
+  border-radius: 40px;
+  border: solid 3px #2263c1;
+  color: #cbcbcb;
+  font-size: 1.4em;
+  font-family: sf-ui;
+}
+
+input:focus {
+  outline: none;
+}
+
+.select-wrapper {
+  width: 69%;
+  border-radius: 40px;
+  position: relative;
+}
+
+.select-wrapper:nth-child(1) {
+  position: relative;
+}
+
+.select-wrapper:nth-child(5) {
+  position: relative;
+}
+
+select:not(.checkboxes) {
+  -webkit-appearance: none;
+  border-radius: 40px;
+  padding: 2% 3% 2% 6%;
+  color: #797777;
+  background-color: #02021b;
+  width: 100%;
+  border: solid 3px #2263c1;
+  font-size: 1.4em;
+  font-family: sf-ui;
+}
+
+select:focus {
+  outline: none;
+}
+
+.events-input {
+  background-color: #02021b;
+  width: 90%;
+  padding: 2% 3% 2% 6%;
+  border-radius: 40px;
+  border: solid 3px #2263c1;
+  color: #cbcbcb;
+  font-size: 1.4em;
+  font-family: sf-ui;
+  height: 55%;
+}
+
+.events-list {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-height: 70vh;
+  background-color: #02021b;
+  display: none;
+  flex-flow: column;
+  z-index: 10;
+  overflow: scroll;
+}
+
+.events-list > span {
+  text-align: start;
+  height: 2vh;
+  padding: 2% 0 2% 8%;
+  color: #cbcbcb;
+  font-family: sf-ui;
+  font-size: 1.2em;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  cursor: pointer;
+}
+
+.input-el > .radio-inputs {
+  width: 70%;
+  height: 10%;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1em;
+}
+
+.input-el > .radio-inputs > span {
+  margin-left: 2vh;
+  color: #ffffff;
+  font-family: sf-ui;
+  font-size: 1.5em;
+}
+
+.input-el > .radio-inputs > .radio-buttons > input {
+  margin: 2vh;
+}
+
+.selected-events {
+  width: 64%;
+  height: 10%;
+  background-color: #02021b;
+  padding: 2% 2% 2% 2%;
+  border-radius: 10px;
+  border: solid 3px #2263c1;
+  color: #cbcbcb;
+  font-size: 1em;
+  font-family: sf-ui;
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.sports {
+  width: auto;
+  padding: 2% 2% 2% 2%;
+  margin: 1%;
+  height: 40%;
+  background-color: #02021b;
+  border-radius: 40px;
+  margin-left: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #cbcbcb;
+  border: solid 1px #2263c1;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.textarea-type:focus {
+  outline: none;
+}
+
+.reg-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-div > .reg-button-container > .register {
+  font-size: 1.5em;
+  letter-spacing: 2px;
+  margin: 1.5vh auto;
+  /* position: absolute;
+  left: 50%;
+  transform: translateX(-50%); */
+  background: url("../images/assets/register.png");
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 2% 4%;
+  border-radius: 40px;
+  font-family: SFpro;
+  cursor: pointer;
+}
+
+.checkboxes {
+  -webkit-appearance: none;
+  border-radius: 40px;
+  padding: 2% 3% 2% 6%;
+  color: #797777;
+  background-color: #02021b;
+  width: 60%;
+  border: solid 3px #2263c1;
+  font-size: 1.4em;
+  font-family: sf-ui;
+  box-sizing: content-box;
+}
+
+.checkboxes option {
+  background: #02021b;
+  text-align: start;
+  height: 2vh;
+  padding: 2% 0 2% 8%;
+  color: #cbcbcb;
+  font-family: sf-ui;
+  font-size: 1em;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  cursor: pointer;
+}
+@supports (-moz-appearance: none) {
+  .checkboxes option {
+    background: #02021b;
+    text-align: start;
+    height: 2vh;
+    padding: 2% 0 2% 8%;
+    color: #cbcbcb;
+    font-family: sf-ui;
+    font-size: 1em;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    cursor: pointer;
+  }
+}
+
+.g-recaptcha {
+  display: inline;
+}
+
+.g-recaptcha-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0.5% 0;
+}
+
+#addFileContainer
+/* #videoLink */
+{
+  display: none;
+}
+
+#addFileContainer{
+  display: none;
+  width: 60%;
+  /* background-color: red; */
+  justify-content: center;
+  flex-direction: column; ;
+  align-items: center;
+}
+
+/* #custom-button{
+  width: 60%;
+} */
+
+#custom-text{
+  margin: 2vh;
+  color: #cbcbcb;
+  font-size: 1.4em;
+  font-family: sf-ui;
+}
+
+#custom-button{
+  cursor: pointer;
+  background-color: #02021b;
+  width: 100%;
+  padding: 2% 3% 2% 6%;
+  border-radius: 40px;
+  border: solid 3px #2263c1;
+  color: #cbcbcb;
+  font-size: 1.4em;
+  font-family: sf-ui;
+  outline: none;
+}
+
+#custom-button:focus{
+  outline: none;
+}
+
+@media (max-width: 500px) {
+  body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: #00002e;
+  }
+
+  .form-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-div > .heading {
+    font-size: 2em;
+    margin-left: 0vw;
+  }
+
+  .form-div > .form-container {
+    flex-flow: column;
+    margin-top: 2vh;
+    height: 115vh;
+  }
+
+  .input-el > .radio-inputs > span {
+    font-size: 1.2em;
+  }
+
+  label {
+    font-size: 0.7em;
+  }
+
+  .input-el {
+    width: 100%;
+    height: max-content;
+  }
+
+  .input-el > .radio-inputs {
+    width: 100%;
+    text-align: center;
+  }
+
+  .input-el .text-type {
+    font-size: 1.2em;
+  }
+
+  .events-input {
+    font-size: 1.2em;
+  }
+
+  .events-list {
+    max-height: 40vh;
+  }
+
+  .events-list > span {
+    font-size: 0.9em;
+  }
+
+  select:not(.checkboxes) {
+    font-size: 1.2em;
+    margin: 2vh 0;
+  }
+
+  .checkboxes {
+    font-size: 1.2em;
+    margin: 2vh 0;
+  }
+
+  .select-wrapper {
+    margin: 2vh 0;
+  }
+
+  .select-wrapper > select {
+    margin: 0;
+  }
+
+  .select-wrapper > input {
+    margin: 0;
+  }
+
+  input {
+    margin: 2vh 0;
+  }
+
+  .form-div > .reg-button-container > .register {
+    font-size: 1.2em;
+    padding: 3% 8% 3% 8%;
+  }
+  .back-btn {
+    display: none;
+  }
+  .selected-events {
+    font-size: 0.7em;
+  }
+
+  .msg-box {
+    width: 90vw;
+    height: 40vh;
+  }
+}
+
+@media (max-width: 400px) {
+  .form-div > .heading {
+    font-size: 1.5em;
+  }
+  .input-el .text-type {
+    font-size: 0.8em;
+  }
+  select:not(.checkboxes) {
+    font-size: 0.8em;
+  }
+  .checkboxes {
+    font-size: 0.8em;
+  }
+  .form-div > .form-container {
+    height: 135vh;
+  }
+  .input-el > .radio-inputs > span {
+    font-size: 1em;
+  }
+
+  .input-el > .textarea-type {
+    font-size: 0.8em;
+  }
+  .form-div > .reg-button-container > .register {
+    padding: 6% 10% 6% 10%;
+    font-size: 1em;
+  }
+
+  .events-input {
+    font-size: 0.8em;
+  }
+
+  .events-list {
+    max-height: 40vh;
+  }
+
+  .events-list > span {
+    font-size: 0.8em;
+  }
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./styles/register.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+      crossorigin="anonymous"
+    />
+    <title>Registration</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-14236414-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-14236414-1");
+    </script>
+  </head>
+
+  <body>
+    <div class="msg-box">
+      <span class="inner-text"
+        >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit
+        suscipit quaerat unde magni architecto adipisci blanditiis,
+        necessitatibus distinctio molestiae. Ea amet fugiat ullam suscipit
+        assumenda quod rerum, minus explicabo consectetur!</span
+      >
+      <div class="close-box" onclick="closebox()">OK</div>
+    </div>
+    <div class="form-div">
+      <span class="heading">Registration</span>
+      <a href="./index.html" class="back-btn"
+      ><i class="fas fa-arrow-left"></i
+    ></a>
+    <div class="instructionsContainer regOver">
+      REGISTRATIONS ARE OVER!
+    </div>
+      
+      <!-- <a href="./index.html" class="back-btn"
+        ><i class="fas fa-arrow-left"></i
+      ></a> -->
+     
+      </div>
+      
+      <div class="g-recaptcha-container">
+        <div
+          class="g-recaptcha"
+          data-sitekey="6Ld2H7MUAAAAAK2aN05UrQYmmOPLkQ9d7VFHz-_-"
+        ></div>
+      </div>
+      <!-- <div class="reg-button-container">
+        <span class="register" onclick="prereg()">REGISTER</span>
+      </div> -->
+    </div>
+  </body>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="./js/register.js"></script>
+</html>
