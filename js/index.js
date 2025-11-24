@@ -245,3 +245,118 @@ function toggleDesktopHam() {
         document.getElementsByTagName('html')[0].style.overflowY = 'hidden';
     }
 }
+/* =========================
+   Smooth Scroll Transition:
+   landing-wrapper -> about
+   Insert at end of /mnt/data/index.js
+   ========================= */
+
+(function(){
+  const topEl = document.querySelector('.landing-wrapper'); // landing hero
+  const bottomEl = document.querySelector('.about');        // about section
+  if(!topEl || !bottomEl) return; // safety
+
+  // config (tweak these numbers if you want stronger effect)
+  const cfg = {
+    parallaxTop: 20,      // px translate up for landing when progress=1
+    parallaxBottom: -28,  // px translate for about (moves opposite)
+    scaleTop: 0.005,      // small scale increase for depth
+    scaleBottom: 0.008,
+    smoothing: 0.12       // lerp smoothing (0..1) smaller = softer
+  };
+
+  // state
+  let targetProgress = 0;
+  let currentProgress = 0;
+  let raf = null;
+  let ticking = false;
+
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const lerp = (a,b,t) => a + (b - a) * t;
+
+  function calcProgress(){
+    // We compute how far the user scrolled across the viewport area of the .about section
+    // Use bounding rect so it's robust to different viewports
+    const rect = bottomEl.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // progress 0 when bottomEl top is at bottom of viewport,
+    // progress 1 when bottomEl top is near top (you can tune)
+    // Map rect.top from [vh -> -vh] -> [0..1]
+    const start = vh * 0.0; // start when top hits viewport top
+    const end   = vh * 0.9; // finish a bit before fully off
+    // simpler mapping:
+    const raw = 1 - clamp((rect.top - start) / (rect.height + (vh * 0.2) || 1), 0, 1);
+    return clamp(raw, 0, 1);
+  }
+
+  function onScroll(){
+    targetProgress = calcProgress();
+    if(!ticking){
+      ticking = true;
+      raf = requestAnimationFrame(update);
+    }
+  }
+
+  function update(){
+    // smooth progress
+    currentProgress = lerp(currentProgress, targetProgress, cfg.smoothing);
+    const eased = 1 - Math.pow(1 - currentProgress, 1.8); // ease out
+
+    // compute visual values
+    const topOpacity = clamp(1 - eased * 1.05, 0, 1);
+    const topY = - (eased * cfg.parallaxTop);
+    const topScale = 1 + (currentProgress * cfg.scaleTop);
+
+    const bottomOpacity = clamp(eased * 1.05, 0, 1);
+    const bottomY = (1 - eased) * cfg.parallaxBottom;
+    const bottomScale = 1 + (currentProgress * cfg.scaleBottom);
+
+    // apply transforms
+    topEl.style.opacity = topOpacity;
+    topEl.style.transform = `translateY(${topY}px) scale(${topScale})`;
+
+    bottomEl.style.opacity = bottomOpacity;
+    bottomEl.style.transform = `translateY(${bottomY}px) scale(${bottomScale})`;
+
+    // stop loop if close to target
+    if(Math.abs(currentProgress - targetProgress) < 0.001){
+      currentProgress = targetProgress;
+      ticking = false;
+      cancelAnimationFrame(raf);
+      raf = null;
+      return;
+    }
+    raf = requestAnimationFrame(update);
+  }
+
+  // initialize: ensure about is behind and hidden initially
+  topEl.style.opacity = 1;
+  topEl.style.transform = 'translateY(0) scale(1)';
+  bottomEl.style.opacity = 0;
+  bottomEl.style.transform = 'translateY(0) scale(1)';
+
+  // event listeners
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+
+  // reduced motion accessibility: if prefers-reduced-motion, make it a simple snap
+  const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(mq && mq.matches){
+    window.removeEventListener('scroll', onScroll);
+    topEl.style.transition = 'opacity 200ms linear';
+    bottomEl.style.transition = 'opacity 200ms linear';
+    // decide initial state:
+    const rect = bottomEl.getBoundingClientRect();
+    if(rect.top < window.innerHeight * 0.5){
+      topEl.style.opacity = 0;
+      bottomEl.style.opacity = 1;
+    } else {
+      topEl.style.opacity = 1;
+      bottomEl.style.opacity = 0;
+    }
+  }
+
+  // initial run to set correct progress based on current scroll
+  onScroll();
+})();
+
