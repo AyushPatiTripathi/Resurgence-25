@@ -29,6 +29,7 @@
     z-index: 1000;
     /* margin-bottom: 100px; */
     margin-left: -40px;
+    margin-top: 50px;
     
     
 }
@@ -36,6 +37,7 @@
 .about-heading > span {
     position: top-left;
     /* text-decoration: underline rgb(28, 163, 241); */
+    content:"";
     border-bottom: 2px solid #768ad9;
     
     
@@ -57,7 +59,7 @@
     display: flex;
     gap: 40px; /* Adds space between text and videos */
     align-items: center;
-    gap: 20px;
+    gap: 15px;
 }
 
 /* Individual video styling */
@@ -95,6 +97,7 @@
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE 10+ */
+    margin-top: -30px;
 }
 
 .about-text::-webkit-scrollbar {
