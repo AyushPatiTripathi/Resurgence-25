@@ -12,11 +12,12 @@
 }
 
 .content {
-    height: 100vh;
-    width: 100%;
-    display: grid;
-    grid-template-rows: 10vh 20vh 30px 65vh;
-    grid-template-columns: 10vw 10vw 50vw 10vw 10vw 10vw 10vw;
+    width: 60%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .about-heading {
@@ -26,31 +27,70 @@
     grid-column-start: 2;
     grid-column-end: 4;
     z-index: 1000;
+    /* margin-bottom: 100px; */
+    margin-left: -40px;
+    
+    
 }
 
 .about-heading > span {
-    position: relative;
+    position: top-left;
+    /* text-decoration: underline rgb(28, 163, 241); */
+    border-bottom: 2px solid #768ad9;
+    
+    
 }
 
-.about-heading span::after {
-    position: absolute;
+/* .about-heading span::after {
+     position: absolute;
     left: 0;
     bottom: 0;
     content: "";
     height: 2px;
     width: 20%;
     border-bottom: 2px solid #768ad9;
+     
+    
+} */
+
+.about-main-content {
+    display: flex;
+    gap: 40px; /* Adds space between text and videos */
+    align-items: center;
+    gap: 20px;
 }
 
+/* Individual video styling */
+.about-videos video {
+    
+    width: 100%;
+    border-radius: 10px;
+    padding: 60px;
+     margin-right:-20px ;
+
+  
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .abc {
+        flex-direction: column;
+    }
+
+    .about-videos {
+        width: 100%;
+        height:100%;
+    }
+}
 .about-text {
-    text-align: justify;
-    grid-row-start: 4;
+    flex: 1; /* Allows the text to take up the remaining space */
+    text-align: left;
     font-family: "Bitter", serif;
     font-size: 20px;
     line-height: 35px;
     word-spacing: 2px;
-    grid-column-start: 3;
     z-index: 140;
+    max-height: 400px; /* Adjust as needed */
     overflow-x: hidden;
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
@@ -60,6 +100,15 @@
 .about-text::-webkit-scrollbar {
     width: 0;
     height: 0;
+}
+
+.about-videos {
+    flex-basis: 350px; /* Sets a base width for the videos container */
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+   
 }
 /*
 #fog {
