@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Schedule</title>
+   <link rel="shortcut icon" href="images/icons/Resurgence-favicon.png" type="image/x-icon"> 
+  <title>Schedule | Resurgence-25</title>
   <style>
     :root{
       --bg:#070607;
@@ -84,6 +85,8 @@
       margin: 40px 0 25px 0;
       text-align: left;
       padding: 0 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 10px;
     }
 
     .date-row h3 {
@@ -183,6 +186,22 @@
       background: linear-gradient(135deg, rgba(255, 65, 108, 0.2), rgba(255, 65, 108, 0.1));
       border: 1px solid rgba(255, 65, 108, 0.3);
     }
+    .music { 
+      background: linear-gradient(135deg, rgba(0, 184, 255, 0.2), rgba(0, 184, 255, 0.1));
+      border: 1px solid rgba(0, 184, 255, 0.3);
+    }
+    .art { 
+      background: linear-gradient(135deg, rgba(183, 0, 255, 0.2), rgba(183, 0, 255, 0.1));
+      border: 1px solid rgba(183, 0, 255, 0.3);
+    }
+    .tech { 
+      background: linear-gradient(135deg, rgba(0, 255, 149, 0.2), rgba(0, 255, 149, 0.1));
+      border: 1px solid rgba(0, 255, 149, 0.3);
+    }
+    .sports { 
+      background: linear-gradient(135deg, rgba(255, 0, 85, 0.2), rgba(255, 0, 85, 0.1));
+      border: 1px solid rgba(255, 0, 85, 0.3);
+    }
 
     /* Location text */
     .location {
@@ -196,6 +215,10 @@
     .small {
       font-size: 12px;
       color: var(--muted);
+    }
+
+    .event-day {
+      margin-bottom: 40px;
     }
 
     /* RESPONSIVE */
@@ -236,10 +259,10 @@
   <div class="topbar" role="banner" aria-hidden="false">
     <div class="titlebar" role="navigation" aria-label="Resurgence Schedule topbar">
       <div class="logo" aria-hidden="true">
-        <img src="/mnt/data/phoenix.png" alt="Phoenix logo">
+        <img src="./images/icons/Resurgence-favicon.png" alt="Phoenix logo">
       </div>
       <div>
-        <div style="font-weight:800">Resurgence • Schedule</div>
+        <div style="font-weight:800"> Resurgence • Schedule</div>
         <div class="small">Campus Cultural Fest — Nov 2025</div>
       </div>
     </div>
@@ -253,83 +276,354 @@
       <p>All events and activities during the festival</p>
     </div>
 
-    <!-- Date row -->
-    <div class="date-row">
-      <h3>Friday 19th November</h3>
-      <p>Opening Day</p>
+    <!-- Thursday 26th November -->
+    <div class="event-day">
+      <div class="date-row">
+        <h3>Thursday 26th November</h3>
+        <p>Opening Day</p>
+      </div>
+
+      <div class="event">
+        <div class="event-card">
+          <div class="time">17:00</div>
+          <div class="details">
+            <h4>Voices Unbound: On-the-Spot Poetry Writing</h4>
+          </div>
+          <div class="tag special">Minor Event</div>
+          <div class="location">📍 To be Updated</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">18:15</div>
+          <div class="details">
+            <h4>Space Quiz: Astro Quest</h4>
+          </div>
+          <div class="tag talk">Minor Event</div>
+          <div class="location">📍 To be Updated</div>
+        </div>
+
+  
+        <!-- Friday 27th November -->
+     <div class="event-day">
+      <div class="date-row">
+        <h3>Friday 27th November</h3>
+        <p>Main Events Day</p>
+      </div>
+
+
+        <div class="event-card">
+          <div class="time">16:00</div>
+          <div class="details">
+            <h4>Eklaa Chalo: Mono Act Competition</h4>
+          </div>
+          <div class="tag music">Minor Event </div>
+          <div class="location">📍 To Be Updated</div>
+        </div>
+        <div class="event-card">
+          <div class="time">18:00</div>
+          <div class="details">
+            <h4>Antakshari: Suron Ka Sangram</h4>
+          </div>
+          <div class="tag workshop">Minor Event</div>
+          <div class="location">📍 To be Updated</div>
+        </div>
+        
+
+
+
+    <!-- saturday 28th November -->
+    <div class="event-day">
+      <div class="date-row">
+        <h3>Saturday 28th November</h3>
+        <p>Main Events Day</p>
+      </div>
+            <div class="event-card">
+          <div class="time">17:00</div>
+          <div class="details">
+            <h4>Vichaar Manthan: Hindi Debate</h4>
+          </div>
+          <div class="tag tech">Minor Event</div>
+          <div class="location">📍 To be Updated</div>
+        </div>
+        
+        
+    <!-- Sunday 29th November -->
+    <div class="event-day">
+      <div class="date-row">
+        <h3>Sunday 29th November</h3>
+        <p>Main Events Day</p>
+        </div>
+            <div class="event">
+        <div class="event-card">
+          <div class="time">10:00</div>
+          <div class="details">
+            <h4>Hydro Thrust: Water Rocket Launch</h4>
+          </div>
+          <div class="tag art">Minor Event</div>
+          <div class="location">📍 To be Updated </div>
+        </div>
+      </div>
+        <div class="event-card">
+          <div class="time">11:15</div>
+          <div class="details">
+            <h4>Rangoli Competition</h4>
+          </div>
+          <div class="tag performance">Minor Event</div>
+          <div class="location">📍 To be Updated</div>
+        </div>
+      </div>
+      <div class="event-card">
+          <div class="time">14:00</div>
+          <div class="details">
+            <h4>RasRang: Two Souls, One Story</h4>
+          </div>
+          <div class="tag tech">Minor Event</div>
+          <div class="location">📍 To be Updated</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">16:00</div>
+          <div class="details">
+            <h4>SMVDU ke IDOLS: Duo Singing Competition</h4>
+          </div>
+          <div class="tag music">Minor Event </div>
+          <div class="location">📍 To be Updated </div>
+        </div>
+
+    <!-- Saturday 28th November -->
+    <div class="event-day">
+      <div class="date-row">
+        <h3>Sunday 30th November</h3>
+        <p>Cultural Day</p>
+      </div>
+      </div>
+
+
+        <div class="event-card">
+          <div class="time">10:00</div>
+          <div class="details">
+            <h4>Face Painting</h4>
+          </div>
+          <div class="tag dance">Minor Event</div>
+          <div class="location">📍 To be Updated</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">13:45</div>
+          <div class="details">
+            <h4>On spot Theme Painting</h4>
+          </div>
+          <div class="tag music">Minor Event</div>
+          <div class="location">📍 To be Updated</div>
+        </div>
+     
+        <div class="event-card">
+          <div class="time">16:15</div>
+          <div class="details">
+            <h4>Rangmanch-e-Sadak: Street Play</h4>
+          </div>
+          <div class="tag music">Major Event</div>
+          <div class="location">📍 To be Updated</div>
+        </div>
+   
+     <div class="event">
+        <div class="event-card">
+          <div class="time">18:30</div>
+          <div class="details">
+            <h4>Power Yoga performance</h4>
+          </div>
+          <div class="tag dance">Minor Event</div>
+          <div class="location">📍 Cultural Hall</div>
+        </div>
+    <!-- Saturday 28th November -->
+    <div class="event-day">
+      <div class="date-row">
+        <h3>Saturday 28th November</h3>
+        <p>Cultural Day</p>
+      </div>
+
+      <div class="event">
+        <div class="event-card">
+          <div class="time">10:00</div>
+          <div class="details">
+            <h4>Classical Dance Showcase</h4>
+          </div>
+          <div class="tag dance">Dance</div>
+          <div class="location">📍 Cultural Hall</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">11:30</div>
+          <div class="details">
+            <h4>Vichaar Manthan: Hindi Debate</h4>
+          </div>
+          <div class="tag talk">Literary Event</div>
+          <div class="location">📍 Seminar Hall B</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">13:30</div>
+          <div class="details">
+            <h4>Robotics Workshop</h4>
+          </div>
+          <div class="tag workshop">Workshop</div>
+          <div class="location">📍 Engineering Block</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">15:30</div>
+          <div class="details">
+            <h4>Battle of Bands: Finals</h4>
+          </div>
+          <div class="tag music">Music</div>
+          <div class="location">📍 Amphitheater</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">17:30</div>
+          <div class="details">
+            <h4>Fashion Show</h4>
+          </div>
+          <div class="tag performance">Performance</div>
+          <div class="location">📍 Main Stage</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">20:00</div>
+          <div class="details">
+            <h4>Bollywood Night</h4>
+          </div>
+          <div class="tag music">Music</div>
+          <div class="location">📍 Central Lawn</div>
+        </div>
+      </div>
     </div>
 
-    <!-- Event List -->
-    <div class="event">
-      <div class="event-card">
-        <div class="time">09:00</div>
-        <div class="details">
-          <h4>Festival Opening Ceremony</h4>
-        </div>
-        <div class="tag special">SPECIAL</div>
-        <div class="location">📍 Main Auditorium</div>
+    <!-- Sunday 29th November -->
+    <div class="event-day">
+      <div class="date-row">
+        <h3>Sunday 29th November</h3>
+        <p>Sports & Adventure Day</p>
       </div>
 
-      <div class="event-card">
-        <div class="time">11:30</div>
-        <div class="details">
-          <h4>Classical Dance Competition</h4>
+      <div class="event">
+        <div class="event-card">
+          <div class="time">09:00</div>
+          <div class="details">
+            <h4>Treasure Hunt</h4>
+          </div>
+          <div class="tag special">Adventure</div>
+          <div class="location">📍 Campus Grounds</div>
         </div>
-        <div class="tag dance">DANCE</div>
-        <div class="location">📍 Cultural Hall</div>
-      </div>
 
-      <div class="event-card">
-        <div class="time">14:00</div>
-        <div class="details">
-          <h4>Music Concert</h4>
+        <div class="event-card">
+          <div class="time">11:00</div>
+          <div class="details">
+            <h4>RasRang: Two Souls, One Story</h4>
+          </div>
+          <div class="tag dance">Dance Drama</div>
+          <div class="location">📍 Main Stage</div>
         </div>
-        <div class="tag performance">PERFORMANCE</div>
-        <div class="location">📍 Amphitheater</div>
-      </div>
 
-      <div class="event-card">
-        <div class="time">16:30</div>
-        <div class="details">
-          <h4>Poetry Slam Workshop</h4>
+        <div class="event-card">
+          <div class="time">13:00</div>
+          <div class="details">
+            <h4>E-Sports Tournament</h4>
+          </div>
+          <div class="tag tech">Gaming</div>
+          <div class="location">📍 Gaming Zone</div>
         </div>
-        <div class="tag workshop">WORKSHOP</div>
-        <div class="location">📍 Library Annex</div>
-      </div>
 
-      <div class="event-card">
-        <div class="time">19:00</div>
-        <div class="details">
-          <h4>Stand-up Comedy Night</h4>
+        <div class="event-card">
+          <div class="time">15:00</div>
+          <div class="details">
+            <h4>Poetry Slam</h4>
+          </div>
+          <div class="tag talk">Literary Event</div>
+          <div class="location">📍 Library Annex</div>
         </div>
-        <div class="tag performance">PERFORMANCE</div>
-        <div class="location">📍 Student Center</div>
+
+        <div class="event-card">
+          <div class="time">17:00</div>
+          <div class="details">
+            <h4>Futsal Tournament</h4>
+          </div>
+          <div class="tag sports">Sports</div>
+          <div class="location">📍 Sports Complex</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">19:00</div>
+          <div class="details">
+            <h4>Open Mic Night</h4>
+          </div>
+          <div class="tag performance">Performance</div>
+          <div class="location">📍 Student Center</div>
+        </div>
       </div>
     </div>
 
-    <!-- Second Date -->
-    <div class="date-row">
-      <h3>Saturday 20th November</h3>
-      <p>Main Events Day</p>
-    </div>
-
-    <div class="event">
-      <div class="event-card">
-        <div class="time">10:00</div>
-        <div class="details">
-          <h4>Art Exhibition Opening</h4>
-        </div>
-        <div class="tag special">EXHIBITION</div>
-        <div class="location">📍 Art Gallery</div>
+    <!-- Monday 30th November -->
+    <div class="event-day">
+      <div class="date-row">
+        <h3>Monday 30th November</h3>
+        <p>Finale Day</p>
       </div>
 
-      <div class="event-card">
-        <div class="time">13:00</div>
-        <div class="details">
-          <h4>Tech Innovation Talk</h4>
+      <div class="event">
+        <div class="event-card">
+          <div class="time">10:00</div>
+          <div class="details">
+            <h4>Short Film Screening</h4>
+          </div>
+          <div class="tag art">Film</div>
+          <div class="location">📍 Auditorium</div>
         </div>
-        <div class="tag talk">TALK</div>
-        <div class="location">📍 Innovation Hub</div>
+
+        <div class="event-card">
+          <div class="time">12:00</div>
+          <div class="details">
+            <h4>Creative Writing Workshop</h4>
+          </div>
+          <div class="tag workshop">Workshop</div>
+          <div class="location">📍 Seminar Hall A</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">14:00</div>
+          <div class="details">
+            <h4>Quiz Competition Finals</h4>
+          </div>
+          <div class="tag special">Special Event</div>
+          <div class="location">📍 Main Hall</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">16:30</div>
+          <div class="details">
+            <h4>Street Play Competition</h4>
+          </div>
+          <div class="tag performance">Drama</div>
+          <div class="location">📍 Central Plaza</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">19:00</div>
+          <div class="details">
+            <h4>Closing Ceremony</h4>
+          </div>
+          <div class="tag special">Special Event</div>
+          <div class="location">📍 Main Auditorium</div>
+        </div>
+
+        <div class="event-card">
+          <div class="time">20:30</div>
+          <div class="details">
+            <h4>Farewell Party</h4>
+          </div>
+          <div class="tag music">Music</div>
+          <div class="location">📍 Central Lawn</div>
+        </div>
       </div>
     </div>
   </div>
