@@ -1,114 +1,289 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team Leaderboard</title>
-  <link rel="stylesheet" href="./styles/leaderboard.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+   <link rel="shortcut icon" href="images/icons/Resurgence-favicon.png" type="image/x-icon"> 
+  <title> Leaderboard | Resurgence-25</title>
+  <meta name="description" content="Static leaderboard with ember particle background" />
+  <style>
+    :root{
+      --bg:#070607;
+      --card: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+      --accent:#ff6a00;
+      --accent-glow: rgba(255, 106, 0, 0.4);
+      --muted: rgba(255,255,255,0.72);
+      --max:1200px;
+      --easing: cubic-bezier(.2,.9,.2,1);
+    }
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:#fff;background:var(--bg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    /* canvas */
+    #embers{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+    .wrap{position:relative;z-index:6;max-width:var(--max);margin:36px auto;padding:28px;box-sizing:border-box;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
+    @media (max-width:980px){ .wrap{grid-template-columns:1fr; padding:18px} }
+
+    .card{
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,0.02));
+      border-radius:18px;padding:24px;box-shadow: 0 14px 50px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+      min-height:360px;
+      transition: all 0.3s var(--easing);
+    }
+
+    .card:hover {
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255, 106, 0, 0.1), inset 0 1px rgba(255,255,255,0.02);
+    }
+
+    h1{font-size:32px;margin:6px 0 8px;letter-spacing:0.02em;background: linear-gradient(135deg, #fff, var(--accent));-webkit-background-clip: text;-webkit-text-fill-color: transparent;background-clip: text;}
+    .subtitle{color:var(--muted);font-size:13px;margin-bottom:16px;line-height:1.5}
+
+    .table-wrap{overflow:auto;max-height:66vh;padding-right:6px;border-radius:12px;margin-top:12px}
+    table{width:100%;border-collapse:collapse;font-size:14px;color:rgba(255,255,255,0.92);min-width:720px}
+    thead th{position:sticky;top:0;background:linear-gradient(180deg, rgba(0,0,0,0.24), rgba(0,0,0,0.18));padding:16px 12px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:left;font-weight:700;font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted)}
+    tbody tr{transition: all 0.2s var(--easing);}
+    tbody tr:hover{background:rgba(255,255,255,0.03);transform: translateY(-1px);}
+    tbody td{padding:14px 12px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle}
+    td.rank{font-weight:800;width:48px;position:relative}
+    td.rank:before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:60%;background:var(--accent);border-radius:0 2px 2px 0;opacity:0;transition: opacity 0.3s var(--easing)}
+    tr:nth-child(1) td.rank:before{opacity:1;background:linear-gradient(to bottom, #FFD700, #FFA500)}
+    tr:nth-child(2) td.rank:before{opacity:1;background:linear-gradient(to bottom, #C0C0C0, #A0A0A0)}
+    tr:nth-child(3) td.rank:before{opacity:1;background:linear-gradient(to bottom, #CD7F32, #8C5A2A)}
+    td.team{display:flex;gap:12px;align-items:center;min-width:210px}
+    td.team img{width:44px;height:44px;border-radius:10px;object-fit:cover;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);transition: all 0.3s var(--easing);}
+    tr:hover td.team img{transform: scale(1.05);box-shadow: 0 0 0 1px rgba(255,255,255,0.1);}
+    .medals{display:flex;gap:8px;align-items:center}
+    .medal{min-width:36px;text-align:center;border-radius:8px;padding:6px 8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));font-weight:700;transition: all 0.2s var(--easing)}
+    .medal:hover{transform: scale(1.1);}
+    td:nth-child(4) .medal{background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));border:1px solid rgba(255,215,0,0.1);}
+    td:nth-child(5) .medal{background: linear-gradient(135deg, rgba(192,192,192,0.15), rgba(192,192,192,0.05));border:1px solid rgba(192,192,192,0.1);}
+    td:nth-child(6) .medal{background: linear-gradient(135deg, rgba(205,127,50,0.15), rgba(205,127,50,0.05));border:1px solid rgba(205,127,50,0.1);}
+    td:nth-child(7){font-weight:700;color:var(--accent);}
+    td:nth-child(8){font-weight:600;}
+
+    .side{
+      display:flex;flex-direction:column;gap:14px;
+      align-self:start;
+    }
+    .panel{background:var(--glass);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);transition: all 0.3s var(--easing);}
+    .panel:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.05);transform: translateY(-2px);}
+    .small{font-size:12px;color:var(--muted);line-height:1.5}
+
+    .topbar{position:fixed;left:0;right:0;top:12px;display:flex;justify-content:center;z-index:8;pointer-events:none}
+    .topbar .titlebar{background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.12));padding:8px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);pointer-events:auto;display:flex;gap:12px;align-items:center;transition: all 0.3s var(--easing);}
+    .topbar .titlebar:hover{background: linear-gradient(180deg, rgba(0,0,0,0.32), rgba(0,0,0,0.16));border-color:rgba(255,255,255,0.05);}
+    .logo{width:38px;height:38px;border-radius:8px;overflow:hidden;flex:0 0 38px}
+    .logo img{width:100%;height:100%;object-fit:cover}
+
+    .vignette{position:fixed;inset:0;pointer-events:none;z-index:5;background:radial-gradient(ellipse at 40% 25%, rgba(0,0,0,0.12), rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.95) 100%)}
+
+    .update-indicator{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:6px;background:rgba(255,106,0,0.1);border:1px solid rgba(255,106,0,0.2);color:var(--accent);font-size:11px;font-weight:600;margin-left:8px;vertical-align:middle}
+    .update-indicator:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);animation: pulse 2s infinite}
+
+    @keyframes pulse {
+      0% {opacity: 1;}
+      50% {opacity: 0.4;}
+      100% {opacity: 1;}
+    }
+
+    @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  </style>
 </head>
 <body>
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
 
-<div class="leaderboard-container">
-  <h1 class="title">🏅 LEADERBOARD 🏅</h1>
-
-  <div class="table-wrapper">
-    <table class="leaderboard">
-
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Team</th>
-          <th>Events</th>
-          <th>Gold</th>
-          <th>Silver</th>
-          <th>Bronze</th>
-          <th>Points</th>
-          <th>Win Rate</th>
-        </tr>
-      </thead>
-
-      <tbody>
-
-       <!-- First row -->
-        <tr>
-          <td>1</td>
-          <td class="team">
-            <img src="team1.png" alt="Team Logo">
-            <span>Agni</span>
-          </td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0%</td>
-        </tr>
-
-       <!-- Second row -->
-        <tr>
-          <td>2</td>
-          <td class="team">
-            <img src="team2.png" alt="Team Logo">
-            <span>Akash</span>
-          </td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0%</td>
-        </tr>
-
-        <!-- Third row -->
-        <tr>
-          <td>3</td>
-          <td class="team">
-            <img src="team3.png" alt="Team Logo">
-            <span>Jal</span>
-          </td>
-            <td>0</td>
-              <td>0</td>
-                <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0%</td>
-        </tr>
-
-        <!-- fourth row -->
-        <tr>
-          <td>4</td>
-          <td class="team">
-            <img src="team4.png" alt="Team Logo">
-            <span>Prithvi</span>
-          </td>
-            <td>0</td>
-              <td>0</td>
-                <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0%</td>
-        </tr>
-
-        <!-- fiveth row -->
-        <tr>
-          <td>5</td>
-          <td class="team">
-            <img src="team5.png" alt="Team Logo">
-            <span>Vayu</span>
-          </td>
-            <td>0</td>
-              <td>0</td>
-                <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0%</td>
-        </tr>
-
-      </tbody>
-
-    </table>
+  <div class="topbar" role="banner" aria-hidden="false">
+    <div class="titlebar" role="navigation" aria-label="Resurgence Leaderboard topbar">
+      <div class="logo" aria-hidden="true">
+        <img src="./images/icons/Resurgence-favicon.png" alt="Phoenix logo">
+      </div>
+      <div>
+        <div style="font-weight:800">Resurgence  • Leaderboard</div>
+        <div class="small"> Annual Cultural Fest — 2025</div>
+      </div>
+    </div>
   </div>
-</div>
 
+  <main class="wrap" role="main" aria-labelledby="page-title">
+    <section class="card" aria-labelledby="page-title">
+      <h1 id="page-title">Leaderboard</h1>
+      <div class="subtitle"></div>
+
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+        <div class="small">Last update: <strong id="lastUpdate">Nov 25, 2025</strong><span class="update-indicator">LIVE</span></div>
+      </div>
+
+      <div class="table-wrap" role="region" aria-label="Leaderboard table">
+        <table id="lbTable" role="table" aria-describedby="desc">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Team</th>
+              <th>Events</th>
+              <th>Gold</th>
+              <th>Silver</th>
+              <th>Bronze</th>
+              <th>Points</th>
+              <th>Win Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="rank">1</td>
+              <td class="team">
+                <img src="/mnt/data/team1.png" alt="Agni logo">
+                <span>Agni</span>
+              </td>
+              <td>0</td>
+              <td><div class="medal">0</div></td>
+              <td><div class="medal">0</div></td>
+              <td><div class="medal">0</div></td>
+              <td>0</td>
+              <td>0%</td>
+            </tr>
+
+            <tr>
+              <td class="rank">2</td>
+              <td class="team">
+                <img src="/mnt/data/team2.png" alt="Akash logo">
+                <span>Akash</span>
+              </td>
+              <td>0</td>
+              <td><div class="medal">0</div></td>
+              <td><div class="medal">0</div></td>
+              <td><div class="medal">0</div></td>
+              <td>0</td>
+              <td>0%</td>
+            </tr>
+
+            <tr>
+              <td class="rank">3</td>
+              <td class="team">
+                <img src="/mnt/data/team3.png" alt="Jal logo">
+                <span>Jal</span>
+              </td>
+              <td>0</td>
+              <td><div class="medal">0</div></td>
+              <td><div class="medal">0</div></td>
+              <td><div class="medal">0</div></td>
+              <td>0</td>
+              <td>0%</td>
+            </tr>
+
+            <tr>
+              <td class="rank">4</td>
+              <td class="team">
+                <img src="/mnt/data/team4.png" alt="Prithvi logo">
+                <span>Prithvi</span>
+              </td>
+              <td>0</td>
+              <td><div class="medal">0</div></td>
+              <td><div class="medal">0</div></td>
+              <td><div class="medal">0</div></td>
+              <td>0</td>
+              <td>0%</td>
+            </tr>
+
+            <tr>
+              <td class="rank">5</td>
+              <td class="team">
+                <img src="/mnt/data/team5.png" alt="Vayu logo">
+                <span>Vayu</span>
+              </td>
+              <td>0</td>
+              <td><div class="medal">0</div></td>
+              <td><div class="medal">0</div></td>
+              <td><div class="medal">0</div></td>
+              <td>0</td>
+              <td>0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="desc" class="small" style="margin-top:14px">Points are displayed as provided — In case of an query the house captains can contact the core team.</div>
+    </section>
+
+    <aside class="side" aria-label="Info">
+    <div class="panel">
+        <div style="font-weight:800;margin-bottom:8px">Points formula </div>
+        <div class="small">For Minor event <strong> Gold = 30 | Silver = 20 | Bronze = 10 </strong> <br> For Major events <strong> Gold = 60 | Silver = 30 | Bronze = 10 </strong></div>
+      </div>
+     <!-- <div class="panel">
+        <div style="font-weight:800;margin-bottom:8px">How to edit</div>
+        <div class="small">Open <code>/mnt/data/leaderboard.html</code> in a text editor and update the rows in the table's &lt;tbody&gt;. Save and refresh the browser.</div>
+      </div> -->
+
+     
+    </aside>
+  </main>
+
+  <script>
+    /* Ember particle background (kept, no data/API logic) */
+    (function(){
+      const canvas = document.getElementById('embers');
+      const ctx = canvas.getContext('2d');
+      const DPR = Math.max(1, window.devicePixelRatio || 1);
+
+      function resize(){
+        canvas.width = innerWidth * DPR; canvas.height = innerHeight * DPR;
+        canvas.style.width = innerWidth + 'px'; canvas.style.height = innerHeight + 'px';
+        ctx.setTransform(DPR,0,0,DPR,0,0);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const particles = [];
+      const BASE = 70;
+      function rand(a,b){return Math.random()*(b-a)+a}
+      function spawn(){
+        return {
+          x: rand(-120, innerWidth + 120),
+          y: rand(innerHeight*0.35, innerHeight + 160),
+          vx: rand(-0.45,0.45),
+          vy: rand(-1.4,-0.4),
+          r: rand(0.6,4.2),
+          life: rand(80,420),
+          hue: rand(20,46),
+          alpha: rand(0.08,0.95)
+        }
+      }
+      function init(){
+        particles.length = 0;
+        const count = Math.round((innerWidth/1200) * BASE);
+        for(let i=0;i<count;i++) particles.push(spawn());
+      }
+      init();
+
+      function step(){
+        ctx.clearRect(0,0,innerWidth,innerHeight);
+        for(let i=0;i<particles.length;i++){
+          const p = particles[i];
+          p.x += p.vx; p.y += p.vy; p.life -= 1;
+          p.vx += (innerWidth*0.5 - p.x) * 0.0000016;
+          const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*8);
+          grd.addColorStop(0, `hsla(${p.hue},100%,60%,${p.alpha})`);
+          grd.addColorStop(0.6, `hsla(${p.hue},92%,48%,${Math.max(0.08, p.alpha*0.3)})`);
+          grd.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = grd;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r*1.2, 0, Math.PI*2); ctx.fill();
+
+          if(Math.random() < 0.02){
+            ctx.globalAlpha = Math.random()*0.8;
+            ctx.fillRect(p.x + rand(-2.2,2.2), p.y + rand(-2.2,2.2), Math.random()*1.6, Math.random()*1.6);
+            ctx.globalAlpha = 1;
+          }
+
+          if(p.life <= 0 || p.y < -120) particles[i] = spawn();
+        }
+        requestAnimationFrame(step);
+      }
+      step();
+      let rt; window.addEventListener('resize', ()=>{clearTimeout(rt); rt = setTimeout(init, 160)});
+    })();
+  </script>
 </body>
 </html>

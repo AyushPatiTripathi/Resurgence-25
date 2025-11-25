@@ -4,74 +4,399 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Event Schedule</title>
-  <link rel="stylesheet" href="./styles/schedule.css">
+  <style>
+    :root{
+      --bg:#070607;
+      --card: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+      --accent:#ff6a00;
+      --accent-glow: rgba(255, 106, 0, 0.4);
+      --muted: rgba(255,255,255,0.72);
+      --max:1200px;
+      --easing: cubic-bezier(.2,.9,.2,1);
+    }
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:#fff;background:var(--bg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    
+    /* canvas */
+    #embers{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+    
+    .vignette{position:fixed;inset:0;pointer-events:none;z-index:5;background:radial-gradient(ellipse at 40% 25%, rgba(0,0,0,0.12), rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.95) 100%)}
+
+    .topbar{position:fixed;left:0;right:0;top:12px;display:flex;justify-content:center;z-index:8;pointer-events:none}
+    .topbar .titlebar{background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.12));padding:8px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);pointer-events:auto;display:flex;gap:12px;align-items:center;transition: all 0.3s var(--easing);}
+    .topbar .titlebar:hover{background: linear-gradient(180deg, rgba(0,0,0,0.32), rgba(0,0,0,0.16));border-color:rgba(255,255,255,0.05);}
+    .logo{width:38px;height:38px;border-radius:8px;overflow:hidden;flex:0 0 38px}
+    .logo img{width:100%;height:100%;object-fit:cover}
+
+    /* Schedule Container */
+    .schedule-container {
+      position: relative;
+      z-index: 6;
+      width: 90%;
+      max-width: var(--max);
+      margin: 80px auto 40px;
+      text-align: center;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 30px;
+    }
+
+    .schedule-btn {
+      background: linear-gradient(135deg, var(--accent), #ff9d00);
+      border: none;
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 20px rgba(255, 106, 0, 0.3);
+      transition: all 0.3s var(--easing);
+      cursor: pointer;
+    }
+
+    .schedule-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(255, 106, 0, 0.4);
+    }
+
+    .header h2 {
+      font-size: 32px;
+      margin: 6px 0 8px;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    /* Date row */
+    .date-row {
+      margin: 40px 0 25px 0;
+      text-align: left;
+      padding: 0 10px;
+    }
+
+    .date-row h3 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .date-row p {
+      margin: 5px 0 0 0;
+      font-size: 15px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Event Cards */
+    .event-card {
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,0.02));
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.03);
+      display: grid;
+      grid-template-columns: 100px 1fr auto auto;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.3s var(--easing);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 1px rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px);
+    }
+
+    .event-card:hover {
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255, 106, 0, 0.1), inset 0 1px rgba(255,255,255,0.02);
+    }
+
+    /* Time box */
+    .time {
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(0,0,0,0.12));
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 12px 10px;
+      border-radius: 10px;
+      font-weight: 700;
+      width: 80px;
+      text-align: center;
+      font-size: 15px;
+      transition: all 0.3s var(--easing);
+    }
+
+    .event-card:hover .time {
+      border-color: rgba(255, 106, 0, 0.3);
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0.15));
+    }
+
+    /* Event title */
+    .event-card h4 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: left;
+    }
+
+    /* Tags */
+    .tag {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      transition: all 0.3s var(--easing);
+      letter-spacing: 0.03em;
+    }
+
+    .tag:hover {
+      transform: scale(1.05);
+    }
+
+    .special { 
+      background: linear-gradient(135deg, rgba(255, 136, 0, 0.2), rgba(255, 136, 0, 0.1));
+      border: 1px solid rgba(255, 136, 0, 0.3);
+    }
+    .talk { 
+      background: linear-gradient(135deg, rgba(0, 199, 165, 0.2), rgba(0, 199, 165, 0.1));
+      border: 1px solid rgba(0, 199, 165, 0.3);
+    }
+    .performance { 
+      background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 107, 0, 0.1));
+      border: 1px solid rgba(255, 107, 0, 0.3);
+    }
+    .workshop { 
+      background: linear-gradient(135deg, rgba(109, 107, 255, 0.2), rgba(109, 107, 255, 0.1));
+      border: 1px solid rgba(109, 107, 255, 0.3);
+    }
+    .dance { 
+      background: linear-gradient(135deg, rgba(255, 65, 108, 0.2), rgba(255, 65, 108, 0.1));
+      border: 1px solid rgba(255, 65, 108, 0.3);
+    }
+
+    /* Location text */
+    .location {
+      font-size: 14px;
+      opacity: 0.85;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .event-card {
+        grid-template-columns: 80px 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 12px;
+        padding: 16px;
+      }
+
+      .tag, .location {
+        justify-self: start;
+        grid-column: 1 / -1;
+      }
+      
+      .location {
+        grid-column: 2;
+      }
+      
+      .schedule-container {
+        margin-top: 100px;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        transition:none!important;
+        animation:none!important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
 
-<div class="schedule-container">
-
-  <!--  Header -->
-  <div class="header">
-    <button class="schedule-btn">SCHEDULE</button>
-    <h2>Programme Timetable</h2>
-  </div>
-<!-- data row -->
-  <div class="date-row">
-    <h3>Friday 19th November</h3>
-    <p>Opening Day</p>
-  </div>
-
-  <!-- Event List -->
-  <div class="event">
-
-    <div class="event-card">
-    <div class="time">00:00</div>
-    <div class="details">
-        <h4>Festival Opening Ceremony</h4>
+  <div class="topbar" role="banner" aria-hidden="false">
+    <div class="titlebar" role="navigation" aria-label="Resurgence Schedule topbar">
+      <div class="logo" aria-hidden="true">
+        <img src="/mnt/data/phoenix.png" alt="Phoenix logo">
       </div>
-      <div class="tag special">SPECIAL</div>
-      <div class="location">📍Matrika</div>
-    </div>
-
-    <div class="event-card">
-      <div class="time">00:00</div>
-      <div class="details">
-        <h4>xyz</h4>
+      <div>
+        <div style="font-weight:800">Resurgence • Schedule</div>
+        <div class="small">Campus Cultural Fest — Nov 2025</div>
       </div>
-      <div class="tag talk">Dance</div>
-      <div class="location">📍xyz</div>
     </div>
-
-    <div class="event-card">
-      <div class="time">00:00</div>
-      <div class="details">
-        <h4> Music Concert</h4>
-      </div>
-      <div class="tag performance">xyz</div>
-      <div class="location">📍Matrika</div>
-    </div>
-
-    <div class="event-card">
-      <div class="time">00:00</div>
-      <div class="details">
-        <h4>Poetry</h4>
-      </div>
-      <div class="tag workshop">xyz</div>
-      <div class="location">📍Matrika A</div>
-    </div>
-
-    <div class="event-card">
-      <div class="time">00:00</div>
-      <div class="details">
-        <h4>xyz</h4>
-      </div>
-      <div class="tag performance">xyz</div>
-      <div class="location">📍Matrika</div>
-    </div>
-
   </div>
 
-</div>
+  <div class="schedule-container">
+    <!-- Header -->
+    <div class="header">
+      <button class="schedule-btn">SCHEDULE</button>
+      <h2>Programme Timetable</h2>
+      <p>All events and activities during the festival</p>
+    </div>
 
+    <!-- Date row -->
+    <div class="date-row">
+      <h3>Friday 19th November</h3>
+      <p>Opening Day</p>
+    </div>
+
+    <!-- Event List -->
+    <div class="event">
+      <div class="event-card">
+        <div class="time">09:00</div>
+        <div class="details">
+          <h4>Festival Opening Ceremony</h4>
+        </div>
+        <div class="tag special">SPECIAL</div>
+        <div class="location">📍 Main Auditorium</div>
+      </div>
+
+      <div class="event-card">
+        <div class="time">11:30</div>
+        <div class="details">
+          <h4>Classical Dance Competition</h4>
+        </div>
+        <div class="tag dance">DANCE</div>
+        <div class="location">📍 Cultural Hall</div>
+      </div>
+
+      <div class="event-card">
+        <div class="time">14:00</div>
+        <div class="details">
+          <h4>Music Concert</h4>
+        </div>
+        <div class="tag performance">PERFORMANCE</div>
+        <div class="location">📍 Amphitheater</div>
+      </div>
+
+      <div class="event-card">
+        <div class="time">16:30</div>
+        <div class="details">
+          <h4>Poetry Slam Workshop</h4>
+        </div>
+        <div class="tag workshop">WORKSHOP</div>
+        <div class="location">📍 Library Annex</div>
+      </div>
+
+      <div class="event-card">
+        <div class="time">19:00</div>
+        <div class="details">
+          <h4>Stand-up Comedy Night</h4>
+        </div>
+        <div class="tag performance">PERFORMANCE</div>
+        <div class="location">📍 Student Center</div>
+      </div>
+    </div>
+
+    <!-- Second Date -->
+    <div class="date-row">
+      <h3>Saturday 20th November</h3>
+      <p>Main Events Day</p>
+    </div>
+
+    <div class="event">
+      <div class="event-card">
+        <div class="time">10:00</div>
+        <div class="details">
+          <h4>Art Exhibition Opening</h4>
+        </div>
+        <div class="tag special">EXHIBITION</div>
+        <div class="location">📍 Art Gallery</div>
+      </div>
+
+      <div class="event-card">
+        <div class="time">13:00</div>
+        <div class="details">
+          <h4>Tech Innovation Talk</h4>
+        </div>
+        <div class="tag talk">TALK</div>
+        <div class="location">📍 Innovation Hub</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Ember particle background (same as leaderboard) */
+    (function(){
+      const canvas = document.getElementById('embers');
+      const ctx = canvas.getContext('2d');
+      const DPR = Math.max(1, window.devicePixelRatio || 1);
+
+      function resize(){
+        canvas.width = innerWidth * DPR; canvas.height = innerHeight * DPR;
+        canvas.style.width = innerWidth + 'px'; canvas.style.height = innerHeight + 'px';
+        ctx.setTransform(DPR,0,0,DPR,0,0);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const particles = [];
+      const BASE = 70;
+      function rand(a,b){return Math.random()*(b-a)+a}
+      function spawn(){
+        return {
+          x: rand(-120, innerWidth + 120),
+          y: rand(innerHeight*0.35, innerHeight + 160),
+          vx: rand(-0.45,0.45),
+          vy: rand(-1.4,-0.4),
+          r: rand(0.6,4.2),
+          life: rand(80,420),
+          hue: rand(20,46),
+          alpha: rand(0.08,0.95)
+        }
+      }
+      function init(){
+        particles.length = 0;
+        const count = Math.round((innerWidth/1200) * BASE);
+        for(let i=0;i<count;i++) particles.push(spawn());
+      }
+      init();
+
+      function step(){
+        ctx.clearRect(0,0,innerWidth,innerHeight);
+        for(let i=0;i<particles.length;i++){
+          const p = particles[i];
+          p.x += p.vx; p.y += p.vy; p.life -= 1;
+          p.vx += (innerWidth*0.5 - p.x) * 0.0000016;
+          const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*8);
+          grd.addColorStop(0, `hsla(${p.hue},100%,60%,${p.alpha})`);
+          grd.addColorStop(0.6, `hsla(${p.hue},92%,48%,${Math.max(0.08, p.alpha*0.3)})`);
+          grd.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = grd;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r*1.2, 0, Math.PI*2); ctx.fill();
+
+          if(Math.random() < 0.02){
+            ctx.globalAlpha = Math.random()*0.8;
+            ctx.fillRect(p.x + rand(-2.2,2.2), p.y + rand(-2.2,2.2), Math.random()*1.6, Math.random()*1.6);
+            ctx.globalAlpha = 1;
+          }
+
+          if(p.life <= 0 || p.y < -120) particles[i] = spawn();
+        }
+        requestAnimationFrame(step);
+      }
+      step();
+      let rt; window.addEventListener('resize', ()=>{clearTimeout(rt); rt = setTimeout(init, 160)});
+    })();
+  </script>
 </body>
 </html>

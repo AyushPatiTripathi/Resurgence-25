@@ -7,13 +7,15 @@
     position: absolute;
     z-index: 15;
     top: 0;
-
 /*.landing-wrapper {
   will-change: transform, opacity; /* hint browser to optimize 
   transition: opacity 420ms cubic-bezier(.22,.9,.3,1), transform 680ms cubic-bezier(.22,.9,.3,1);
   backface-visibility: hidden;
   transform-origin: center;
 */}
+html {
+scroll-behaviour:smooth;
+}
 
 .bottom-div {
     position: absolute;
