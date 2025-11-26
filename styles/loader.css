@@ -1239,6 +1239,7 @@ all and (max-height: 600px) and (orientation: landscape) {
     #oasis-text,
     #oasis-date {
         transform: none;
+        font-size :6vh;
     }
 }
 
@@ -1257,5 +1258,6 @@ all and (max-height: 600px) and (orientation: landscape) {
     }
     #oasis-text {
         margin-top: 50px;
+        font-size:3vh ;
     }
 }

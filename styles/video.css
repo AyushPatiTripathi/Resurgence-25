@@ -136,6 +136,9 @@
     .video-wrapper>.video-heading>span {
         display: inline-block;
         border-bottom: 2px solid #768ad9;
+        font-size: 3em;
+    font-family: "Ikaros-Sans";
+    letter-spacing: 5px;
         width: auto;
     }
     .cards-container {
@@ -228,3 +231,7 @@
         line-height: 4px;
     }
 }
+
+
+
+

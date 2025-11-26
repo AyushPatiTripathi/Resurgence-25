@@ -380,10 +380,11 @@ scroll-behaviour:smooth;
 }
 
 
-@media all and (max-width: 500px) {
+@media all and (max-width: 600px) {
     .landing-wrapper {
-        background: url("../images/assets/mobile-about.jpg");
+        background: url("../images/assets/mobile-landing.jpeg");
         background-size: 100% 100%;
+         position: absolute;
     }
     .mousey {
         display: none;
@@ -449,6 +450,7 @@ scroll-behaviour:smooth;
         left: 5%;
         top: -2.5%;
         margin-top: 1vh;
+        display:none ;
         /* background: url('../images/assets/_final_20.png');
         background-position: center;
         background-repeat: no-repeat;
@@ -470,11 +472,11 @@ scroll-behaviour:smooth;
     }
 
     #landing-2 {
-        font-size: 10vw;
+        font-size: 6vw;
     }
 
     #landing-3 {
-        font-size: 8vw;
+        font-size: 4vw;
     }
 
     .mobile-register {
@@ -482,7 +484,7 @@ scroll-behaviour:smooth;
         margin-bottom: 7.5vh;
     }
     .mobile-register a {
-        font-size: 1.1rem;
+        font-size: 0.9rem;
         color: #fff;
         padding: 16px 36px;
         border-radius: 35px;
@@ -526,11 +528,31 @@ scroll-behaviour:smooth;
     }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 400px) {
     .navigation {
         font-size: 1.1rem;
     }
     .mobile-register a {
         font-size: 1rem;
+         padding: 10px 20px;
+        border-radius: 35px;
     }
 }
+   .Resurgence-landing-container {
+        width: 100%;
+        justify-content: center;
+   }
+    .Resurgence-landing {
+        margin-top: 15vh;
+   }
+    #landing-2 {
+        font-size: 7vw;
+   }
+    #landing-3 {
+        font-size: 5vw;
+   }
+    .mobile-register {
+        margin-top: 5vh;
+   }
+}
+
